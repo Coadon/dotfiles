@@ -58,7 +58,7 @@ set mouse=a
 set hidden
 set title
 
-colorscheme gruvbox
+colorscheme " Color scheme
 
 " Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
 set termguicolors
@@ -445,8 +445,6 @@ nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
-" Hotkeys
-nnoremap <C-s> :w<CR>
 " Ale
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
