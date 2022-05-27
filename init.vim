@@ -10,8 +10,9 @@ let g:ale_disable_lsp = 1
 call plug#begin()
 
 " Aesthetics
-Plug 'morhetz/gruvbox'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'morhetz/gruvbox'
+
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Functionalities
@@ -58,7 +59,8 @@ set mouse=a
 set hidden
 set title
 
-colorscheme " Color scheme
+" Color scheme
+colorscheme gruvbox
 
 " Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
 set termguicolors
@@ -369,30 +371,31 @@ lua << END
 require('nvim-treesitter.install').compilers = {"gcc"}
 
 require('nvim-treesitter.configs').setup {
-    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "maintained",
+  -- A list of parser names, or "all"
+  ensure_installed = {},
 
-    -- Install languages synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
 
-    -- List of parsers to ignore installing
-    ignore_install = {
-        "norg", -- Getting wierd errors with Norg
-    },
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = {},
 
-    highlight = {
-        -- `false` will disable the whole extension
-        enable = true,
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
 
-        -- list of language that will be disabled
-        disable = {},
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = {},
 
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
 }
 END
 
@@ -424,22 +427,19 @@ autocmd FileType journal setlocal tabstop=2 "shiftwidth=2 softtabstop=2
 
 """ Custom Mappings
 
-" Terminal mappings
-nmap <leader>ps <C-w>s<C-w>j:terminal<CR><S-a>
-nmap <leader>pv <C-w>v<C-w>l:terminal<CR><S-a>
 " Split windows
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
+nnoremap sv :split<Return><C-w>w
+nnoremap sg :vsplit<Return><C-w>w
 " Move windows
-nmap s<Space> <C-w>w
-map s<left> <C-w>h
-map s<up> <C-w>k
-map s<down> <C-w>j
-map s<right> <C-w>l
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
+nnoremap s<Space> <C-w>w
+nnoremap s<left> <C-w>h
+nnoremap s<up> <C-w>k
+nnoremap s<down> <C-w>j
+nnoremap s<right> <C-w>l
+nnoremap sh <C-w>h
+nnoremap sk <C-w>k
+nnoremap sj <C-w>j
+nnoremap sl <C-w>l
 " Resize window
 nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
