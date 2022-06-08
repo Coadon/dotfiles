@@ -3,14 +3,10 @@
 set shada="NONE"
 language en_US
 
-" Ale and Coc integrations
-let g:ale_disable_lsp = 1
-
 """ Vim-Plug
 call plug#begin()
 
 " Aesthetics
-Plug 'EdenEast/nightfox.nvim'
 Plug 'morhetz/gruvbox'
 
 Plug 'kyazdani42/nvim-web-devicons'
@@ -19,12 +15,10 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-abolish'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -32,13 +26,12 @@ Plug 'alvan/vim-closetag'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'vim-scripts/loremipsum'
 Plug 'dkarter/bullets.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'yamatsum/nvim-cursorline'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -70,6 +63,18 @@ if has('nvim')
 endif
 
 """ Plugin Configurations
+
+" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " NvimTree START
 
@@ -121,9 +126,9 @@ let g:nvim_tree_icons = {
     \   }
     \ }
 
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <silent> <C-n> :NvimTreeToggle<CR>
+nnoremap <silent> <leader>r :NvimTreeRefresh<CR>
+nnoremap <silent> <leader>n :NvimTreeFindFile<CR>
 " More available functions:
 " NvimTreeOpen
 " NvimTreeClose
@@ -202,7 +207,7 @@ require("indent_blankline").setup {
 END
 
 " TagBar
-"let g:tagbar_width = 30
+nmap <F8> :TagbarToggle<CR>
 
 " coc.nvim START
 
@@ -218,7 +223,7 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-set signcolumn=auto
+set signcolumn=yes
 "if has("nvim-0.5.0") || has("patch-8.1.1564")
 "  " Recently vim can merge signcolumn and number column into one
 "  set signcolumn=number
@@ -362,7 +367,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+noremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " coc.nvim END
 
@@ -399,9 +404,17 @@ require('nvim-treesitter.configs').setup {
 }
 END
 
-" Ale
-let b:ale_linters = {'C': ['clangd']}
-"let g:ale_sign_column_always = 1
+" Neoformat
+let g:neoformat_cpp_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{IndentWidth: 4}"']
+    \}
+let g:neoformat_c_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{IndentWidth: 4}"']
+    \}
+let g:neoformat_enabled_cpp = ['clangformat']
+let g:neoformat_enabled_c = ['clangformat']
 
 " MacOS
 set clipboard+=unnamedplus
@@ -445,13 +458,7 @@ nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
-" Ale
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" Tools mappings
-nnoremap <leader>/ <cmd>Telescope find_files<cr>
-nmap <leader>w :TagbarToggle<CR>
-xmap <leader>a gaip*
-nmap <leader>a gaip*
+" Hotkeys
+map <C-c> <esc>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>

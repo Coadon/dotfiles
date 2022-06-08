@@ -1,7 +1,6 @@
 {
-    //"diagnostic.errorSign": "✘",
-    //"diagnostic.warningSign": "!",
-    //"diagnostic.infoSign": "i",
-    //"diagnostic.hintSign": "•"
-    "diagnostic.displayByAle": true
+    "diagnostic.errorSign": "✘",
+    "diagnostic.warningSign": "!",
+    "diagnostic.infoSign": "i",
+    "diagnostic.hintSign": "•"
 }
