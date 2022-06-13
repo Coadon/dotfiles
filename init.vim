@@ -9,14 +9,11 @@ call plug#begin()
 " Aesthetics
 Plug 'morhetz/gruvbox'
 
-Plug 'kyazdani42/nvim-web-devicons'
-
 " Functionalities
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-tree.lua'
 Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
@@ -41,11 +38,12 @@ filetype plugin indent on
 syntax enable
 set tabstop=4 softtabstop=0 shiftwidth=0 expandtab smarttab autoindent
 set incsearch ignorecase smartcase hlsearch
-set number relativenumber cursorline "cursorcolumn
 "set wildmode=longest,list,full wildmenu
 set ruler laststatus=2 showcmd showmode
 set list listchars=trail:»,tab:»-
-set fillchars+=vert:\ 
+set cursorline "cursorcolumn
+set number "relativenumber
+set fillchars+=vert:\
 set wrap breakindent
 set encoding=utf-8
 set textwidth=0
@@ -71,40 +69,6 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" NvimTree START
-
-nnoremap <silent> <C-n> :NvimTreeToggle<CR>
-nnoremap <silent> <leader>r :NvimTreeRefresh<CR>
-nnoremap <silent> <leader>n :NvimTreeFindFile<CR>
-" More available functions:
-" NvimTreeOpen
-" NvimTreeClose
-" NvimTreeFocus
-" NvimTreeFindFileToggle
-" NvimTreeResize
-" NvimTreeCollapse
-" NvimTreeCollapseKeepBuffers
-
-" a list of groups can be found at `:help nvim_tree_highlight`
-highlight NvimTreeFolderIcon guibg=blue;
-
-lua << END
-require('nvim-tree').setup {
-    renderer = {
-        icons = {
-            glyphs = {
-                folder = {
-                    arrow_closed = "",
-                    arrow_open = "",
-                },
-            },
-        },
-    },
-}
-END
-
-" NvimTree END
 
 " Lualine
 lua << END
@@ -394,6 +358,13 @@ autocmd FileType journal setlocal tabstop=2 "shiftwidth=2 softtabstop=2
 
 """ Custom Functions
 
+function ToggleRelativeLineNumber()
+    if (&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
 
 """ Custom Mappings
 
@@ -418,5 +389,6 @@ nmap <C-w><down> <C-w>-
 " Hotkeys
 map <C-c> <esc>
 nnoremap ` :w<CR>
+nnoremap <silent> <leader><C-c> :call ToggleRelativeLineNumber()<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
