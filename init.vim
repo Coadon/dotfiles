@@ -17,7 +17,6 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -30,6 +29,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'yamatsum/nvim-cursorline'
 Plug 'sbdchd/neoformat'
+Plug 'lervag/vimtex'
+Plug 'vim-scripts/loremipsum'
 
 call plug#end()
 
@@ -128,7 +129,7 @@ require("indent_blankline").setup {
 END
 
 " TagBar
-nmap <F8> :TagbarToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
 
 " coc.nvim START
 
@@ -355,6 +356,12 @@ autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 autocmd FileType markdown setlocal tabstop=2 "shiftwidth=2 softtabstop=2
 autocmd FileType journal setlocal tabstop=2 "shiftwidth=2 softtabstop=2
 
+" Code folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+autocmd BufReadPost,FileReadPost * normal zR
+
 
 """ Custom Functions
 
@@ -388,7 +395,8 @@ nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 " Hotkeys
 map <C-c> <esc>
-nnoremap ` :w<CR>
+nnoremap <C-x> :w<CR>
 nnoremap <silent> <leader><C-c> :call ToggleRelativeLineNumber()<CR>
-nmap <Tab> :bnext<CR>
-nmap <S-Tab> :bprevious<CR>
+nmap <silent> <F2> :bnext<CR>
+nmap <silent> <F3> :bprevious<CR>
+nmap <silent> <F4> :bdelete<CR>

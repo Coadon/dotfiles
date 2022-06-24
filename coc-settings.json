@@ -1,8 +1,8 @@
 {
-    "diagnostic.errorSign": "✘",
+    "diagnostic.errorSign": "x",
     "diagnostic.warningSign": "!",
     "diagnostic.infoSign": "i",
-    "diagnostic.hintSign": "•",
+    "diagnostic.hintSign": "*",
     "diagnostic.floatConfig": {
         "border": true
     }
