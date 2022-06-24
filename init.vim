@@ -28,7 +28,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'yamatsum/nvim-cursorline'
-Plug 'sbdchd/neoformat'
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/loremipsum'
 
@@ -325,18 +324,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 END
-
-" Neoformat
-let g:neoformat_cpp_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['--style="{IndentWidth: 4}"']
-    \}
-let g:neoformat_c_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['--style="{IndentWidth: 4}"']
-    \}
-let g:neoformat_enabled_cpp = ['clangformat']
-let g:neoformat_enabled_c = ['clangformat']
 
 " MacOS
 set clipboard+=unnamedplus
