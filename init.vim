@@ -13,8 +13,8 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
 Plug 'junegunn/vim-easy-align'
@@ -29,6 +29,10 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'yamatsum/nvim-cursorline'
 Plug 'lervag/vimtex'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'vim-scripts/loremipsum'
 
 call plug#end()
@@ -70,45 +74,10 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" Lualine
-lua << END
-require('lualine').setup {
-  options = {
-    icons_enabled = false,
-    theme = 'auto',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-    globalstatus = false,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {
-    lualine_a = {'buffers'},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {'branch'},
-    lualine_y = {'filename'},
-    lualine_z = {'tabs'}
-  },
-  extensions = {}
-}
-END
+" AirLine
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_section_z = airline#section#create(['%p%% %l%//%L%\:%v'])
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
@@ -129,6 +98,11 @@ END
 
 " TagBar
 nmap <silent> <F8> :TagbarToggle<CR>
+
+" UltiSnips - Don't conflict with coc.nvim
+let g:UltiSnipsExpandTrigger = "<Nul>"
+let g:UltiSnipsJumpForwardTrigger = "<Nul>"
+let g:UltiSnipsJumpBackwardTrigger = "<Nul>"
 
 " coc.nvim START
 
@@ -359,31 +333,13 @@ function ToggleRelativeLineNumber()
         set relativenumber
     endif
 endfunc
+command! Rln :call ToggleRelativeLineNumber()
 
 """ Custom Mappings
 
 " Split windows
-nnoremap sv :split<Return><C-w>w
-nnoremap sg :vsplit<Return><C-w>w
-" Move windows
-nnoremap s<Space> <C-w>w
-nnoremap s<left> <C-w>h
-nnoremap s<up> <C-w>k
-nnoremap s<down> <C-w>j
-nnoremap s<right> <C-w>l
-nnoremap sh <C-w>h
-nnoremap sk <C-w>k
-nnoremap sj <C-w>j
-nnoremap sl <C-w>l
-" Resize window
-nmap <C-w><left> <C-w><
-nmap <C-w><right> <C-w>>
-nmap <C-w><up> <C-w>+
-nmap <C-w><down> <C-w>-
+nnoremap <C-w>v :split<Return><C-w>w
+nnoremap <C-w>g :vsplit<Return><C-w>w
 " Hotkeys
 map <C-c> <esc>
 nnoremap <C-x> :w<CR>
-nnoremap <silent> <leader><C-c> :call ToggleRelativeLineNumber()<CR>
-nmap <silent> <F2> :bnext<CR>
-nmap <silent> <F3> :bprevious<CR>
-nmap <silent> <F4> :bdelete<CR>
