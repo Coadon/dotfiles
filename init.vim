@@ -77,7 +77,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " AirLine
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_section_z = airline#section#create(['%p%% %l%//%L%\:%v'])
+let g:airline_section_z = airline#section#create(['%p%% %l%\:%v'])
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
