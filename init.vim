@@ -19,7 +19,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
 Plug 'dkarter/bullets.vim'
@@ -28,7 +27,11 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'yamatsum/nvim-cursorline'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'lervag/vimtex'
+
+" Syntax
+Plug 'beyondmarc/glsl.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -42,9 +45,10 @@ filetype plugin indent on
 syntax enable
 set tabstop=4 softtabstop=0 shiftwidth=0 expandtab smarttab autoindent
 set incsearch ignorecase smartcase hlsearch
-"set wildmode=longest,list,full wildmenu
+set wildmode=longest,list,full wildmenu
 set ruler laststatus=2 showcmd showmode
-set list listchars=trail:»,tab:»-
+set list listchars=trail:»,tab:»- ",eol:↴,space:⋅
+set backspace=indent,eol,start
 set cursorline "cursorcolumn
 set number "relativenumber
 set fillchars+=vert:\
@@ -56,7 +60,7 @@ set hidden
 set title
 
 " Color scheme
-colorscheme gruvbox
+" colorscheme gruvbox
 
 " Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
 set termguicolors
@@ -75,26 +79,13 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " AirLine
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
 let g:airline_section_z = airline#section#create(['%p%% %l%\:%v'])
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-" Indent Blackline
-lua << END
-vim.opt.list = true
---vim.opt.listchars:append("space:⋅")
---vim.opt.listchars:append("eol:↴")
-
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
-}
-END
 
 " TagBar
 nmap <silent> <F8> :TagbarToggle<CR>
@@ -106,37 +97,34 @@ let g:UltiSnipsJumpBackwardTrigger = "<Nul>"
 
 " coc.nvim START
 
-" Give more space for displaying messages.
-set cmdheight=2
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-"if has("nvim-0.5.0") || has("patch-8.1.1564")
-"  " Recently vim can merge signcolumn and number column into one
-"  set signcolumn=number
-"else
-"  set signcolumn=yes
-"endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -147,11 +135,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -165,9 +148,9 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! s:show_documentation()
+function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
@@ -244,7 +227,7 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -262,7 +245,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-noremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " coc.nvim END
 
@@ -299,26 +282,31 @@ require('nvim-treesitter.configs').setup {
 }
 END
 
+" Indent Blackline
+lua << END
+require("indent_blankline").setup {
+    show_current_context = true,
+    --show_current_context_start = true,
+}
+END
+
 " MacOS
 set clipboard+=unnamedplus
 
 """ Filetype-Specific Configurations
 
-" HTML, XML, Jinja
-autocmd FileType html setlocal tabstop=2 "shiftwidth=2 softtabstop=2
-autocmd FileType css setlocal tabstop=2 "shiftwidth=2 softtabstop=2
-autocmd FileType xml setlocal tabstop=2 "shiftwidth=2 softtabstop=2
-autocmd FileType htmldjango setlocal tabstop=2 "shiftwidth=2 softtabstop=2
-autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
-autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
-autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
+autocmd FileType html setlocal tabstop=2
+autocmd FileType css setlocal tabstop=2
+autocmd FileType xml setlocal tabstop=2
 
-" Markdown and Journal
-autocmd FileType markdown setlocal tabstop=2 "shiftwidth=2 softtabstop=2
-autocmd FileType journal setlocal tabstop=2 "shiftwidth=2 softtabstop=2
+autocmd FileType markdown setlocal tabstop=2
+autocmd FileType journal setlocal tabstop=2
+
+au BufEnter,BufNew *.asm,*.s setlocal ft=asm
 
 " Code folding
-set foldmethod=expr
+set foldmethod=manual
+set nofoldenable
 set foldexpr=nvim_treesitter#foldexpr()
 
 autocmd BufReadPost,FileReadPost * normal zR
@@ -342,4 +330,4 @@ nnoremap <C-w>v :split<Return><C-w>w
 nnoremap <C-w>g :vsplit<Return><C-w>w
 " Hotkeys
 map <C-c> <esc>
-nnoremap <C-x> :w<CR>
+"nnoremap <C-x> :w<CR>
