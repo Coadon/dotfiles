@@ -46,7 +46,6 @@ set nowritebackup
 " Automatically read on change
 set autoread
 
-" Rainbow parens
 let g:rainbow_active = 1
 
 """ Custom Functions
@@ -136,11 +135,13 @@ if has('nvim')
 endif
 
 " FZF
+let g:fzf_layout = { 'down': '~60%' }
 let g:rg_derive_root='true'
-set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+set grepprg="rg --smart-case --hidden --follow"
 nnoremap ff :Files<cr>
 nnoremap fg :Rg<cr>
 nnoremap fl :BLines<cr>
+command W :w
 
 " AirLine
 " let g:airline_powerline_fonts = 1
@@ -152,8 +153,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nmap <silent> <F8> :TagbarToggle<cr>
-
-command W :w
 
 " Code folding
 set foldmethod=manual

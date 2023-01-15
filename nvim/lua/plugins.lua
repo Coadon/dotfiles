@@ -1,10 +1,14 @@
+-- Terminologies:
+-- Syntax highlighting, linting, autocompletion, error detection, formatting
+
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Packer itself
+    -- use 'nvim-lua/plenary.nvim' -- Plenary for deps
 
     -- Language server: LSP
     use 'neovim/nvim-lspconfig'
 
-    -- Cmp
+    -- Completiong
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -20,13 +24,11 @@ return require('packer').startup(function()
     use 'vim-airline/vim-airline'
 
     -- Finding files: FZF
-    -- TODO: Consider telescope?
-    use 'junegunn/fzf'
+    use '/usr/local/opt/fzf'
     use 'junegunn/fzf.vim'
 
     -- Method signature
-    -- use 'ray-x/lsp_signature.nvim'
-    use 'folke/neodev.nvim'
+    use 'ray-x/lsp_signature.nvim'
 
     -- Formatting
     use 'sbdchd/neoformat'
@@ -39,35 +41,42 @@ return require('packer').startup(function()
     -- LaTex
     use 'lervag/vimtex'
 
-    -- Rainbow blocks
-    use 'luochen1990/rainbow'
-
-    --
+    -- Utilities
     use 'tpope/vim-fugitive'
     use 'tpope/vim-sensible'
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
-    use 'tpope/vim-dispatch'
 
     -- Snippets
     use{'L3MON4D3/LuaSnip', tag = 'v<CurrentMajor>.*'}
     use 'honza/vim-snippets'
 
-    -- Utilities and functionalities
+    -- functionalities: Move
     use 'junegunn/vim-easy-align'
     use 'easymotion/vim-easymotion'
+
+    -- Color tweak
     use 'chrisbra/Colorizer'
-    use 'ntpeters/vim-better-whitespace'
+
+    -- Autopairs
     use 'windwp/nvim-autopairs'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use 'itchyny/vim-cursorword'
-    use 'preservim/tagbar'
+
+    -- Integration with Tmux: saving time
     use 'preservim/vimux'
+
+    -- Visual feed help
+    use 'itchyny/vim-cursorword'
+    use 'ntpeters/vim-better-whitespace'
+    use 'lukas-reineke/indent-blankline.nvim'
+    use 'luochen1990/rainbow'
     -- use 'dkarter/bullets.vim'
+
+    -- Misc
+    use 'preservim/tagbar'
 
     -- use{'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
 
-
+    -- Languages
     -- use 'Shirk/vim-gas'
     -- use 'p00f/clangd_extensions.nvim'
 end)

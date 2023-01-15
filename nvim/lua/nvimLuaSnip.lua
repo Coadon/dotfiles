@@ -3,19 +3,6 @@ local util = require("luasnip.util.util")
 local node_util = require("luasnip.nodes.util")
 
 require'luasnip'.config.setup({
-	ext_opts = {
-		[types.choiceNode] = {
-			active = {
-				virt_text = {{"●", "GruvBoxOrange"}}
-			}
-		},
-		[types.insertNode] = {
-			active = {
-				virt_text = {{"●", "GruvBoxBlue"}}
-			}
-		}
-	},
-
 	parser_nested_assembler = function(_, snippet)
 		local select = function(snip, no_move)
 			snip.parent:enter_node(snip.indx)

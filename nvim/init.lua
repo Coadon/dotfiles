@@ -1,7 +1,5 @@
 require('plugins')
 
-require("neodev").setup()
-
 require('nvimlsp')
 require('nvimcmp')
 require('nvimLuaSnip')
@@ -17,7 +15,7 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- require("lsp_signature").setup()
+require("lsp_signature").setup()
 
 -- Autopairs setup
 local Rule = require('nvim-autopairs.rule')
