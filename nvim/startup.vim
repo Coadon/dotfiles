@@ -1,9 +1,18 @@
 set shada="NONE"
 
-au FileType cpp,c,Makefile nnoremap <silent> ;r  :VimuxRunCommand "make && $exe"<cr>
-au FileType cpp,c,Makefile nnoremap <silent> ;R  :VimuxRunCommand "make run"<cr>
-au FileType cpp,c,Makefile nnoremap <silent> ;d  :VimuxRunCommand "make && lldb $exe"<CR>
-au FileType cpp,c,Makefile nnoremap <silent> ;D  :VimuxRunCommand "make debug"<CR>
+" Stop working in vimscript.
+" Begin migrating to lua all
+
+au FileType cpp,c,make nnoremap <silent> ;r  :VimuxRunCommand "make && $exe $exeargs"<cr>
+au FileType cpp,c,make nnoremap <silent> ;R  :VimuxRunCommand "make run"<cr>
+au FileType cpp,c,make nnoremap <silent> ;e  :VimuxRunCommand "make $exe"<cr>
+au FileType cpp,c,make nnoremap <silent> ;E  :VimuxRunCommand "make $exe && $exe $exeargs"<cr>
+au FileType cpp,c,make nnoremap <silent> ;d  :VimuxRunCommand "make && lldb $exe"<CR>
+au FileType cpp,c,make nnoremap <silent> ;D  :VimuxRunCommand "make debug"<CR>
+au FileType cpp,c,make nnoremap <silent> ;b  :VimuxRunCommand "make"<cr>
+au FileType cpp,c,make nnoremap <silent> ;c  :VimuxRunCommand "make clean"<cr>
+au FileType cpp,c,make nnoremap <silent> ;k  :VimuxScrollUpInspect<cr>
+au FileType cpp,c,make nnoremap <silent> ;j  :VimuxScrollDownInspect<cr>
 
 " C Helpers
 au BufEnter,BufNew *.cpp nnoremap <silent> ;p :e %<.hpp<CR>
@@ -23,17 +32,20 @@ filetype plugin indent on
 syntax enable
 set expandtab autoindent smartindent smarttab
 set incsearch hlsearch ignorecase smartcase
-set ruler laststatus=2 showcmd showmode
+set ruler showcmd showmode
 set list listchars=tab:>-,trail:⋅
 set backspace=indent,eol,start
 set cursorline "cursorcolumn
-set number "relativenumber
+set number relativenumber
 set wrap breakindent
 set encoding=utf-8
 set textwidth=0
 set mouse=a
 set hidden
 set title
+
+set laststatus=2
+" set laststatus=3
 
 set cinoptions=m1
 
@@ -47,30 +59,14 @@ set nowritebackup
 set autoread
 
 let g:rainbow_active = 1
+let g:cursorword_delay = 800
 
 """ Custom Functions
 
 command Fmt :Neoformat
 
-function ToggleRelativeLineNumber()
-    if (&relativenumber == 1)
-        setlocal norelativenumber
-    else
-        setlocal relativenumber
-    endif
-endfunc
-
-command Rln call ToggleRelativeLineNumber()
-
-function ToggleLineNumber()
-    if (&number == 1)
-        setlocal nonumber
-    else
-        setlocal number
-    endif
-endfunc
-
-command Ln call ToggleLineNumber()
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 
 " Function to trim extra whitespace in whole file
 function Trim()
@@ -78,56 +74,48 @@ function Trim()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
-
 command Trim call Trim()
 
 function SetTab(n)
     let &tabstop=a:n
     let &shiftwidth=a:n
     let &softtabstop=a:n
-    " set expandtab
-    " set autoindent
-    " set smartindent
-    " set smarttab
 endfunction
-
 command -nargs=1 SetTab call SetTab(<f-args>)
 
 " Normal mode and save
 map <C-c> <esc>
-nnoremap <C-s> :w<cr>
-nnoremap <C-S-s> :wa<cr>
+
+" Do we really need those?
 
 inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
 
-nnoremap <C-h> <left>
-nnoremap <C-j> <down>
-nnoremap <C-k> <up>
-nnoremap <C-l> <right>
+" nnoremap <C-h> <left>
+" nnoremap <C-j> <down>
+" nnoremap <C-k> <up>
+" nnoremap <C-l> <right>
 
 nnoremap <C-w>v :split<Return><C-w>w
 nnoremap <C-w>g :vsplit<Return><C-w>w
 
-nnoremap mk :m-2<cr>
-nnoremap mj :m+1<cr>
-xnoremap mk :m'<-2<cr>gv
-xnoremap mj :m'>+1<cr>gv
+" Iterm: use left options for +Esc
+nnoremap <M-S-j> :m .+1<CR>==
+nnoremap <M-S-k> :m .-2<CR>==
+inoremap <M-S-j> <Esc>:m .+1<CR>==gi
+inoremap <M-S-k> <Esc>:m .-2<CR>==gi
+vnoremap <M-S-j> :m '>+1<CR>gv=gv
+vnoremap <M-S-k> :m '<-2<CR>gv=gv
 
-nnoremap <silent> <S-x> :Commentary<cr>
-xnoremap <silent> <S-x> :'<,'>Commentary<cr>gv
+nnoremap <silent> mm :Commentary<cr>
+xnoremap <silent> mm :'<,'>Commentary<cr>gv
+nnoremap <silent> <C-_> :Commentary<cr>
+xnoremap <silent> <C-_> :'<,'>Commentary<cr>gv
 
 " Enable FZF history
 let g:fzf_history_dir = '~/.local/share/nvim/fzf-history'
-
-let g:EasyMotion_smartcase = 1
-
-" runtimepath
-
-" Get syntax files from config folder
-set runtimepath+=~/.config/nvim/syntax/
 
 
 if has('nvim')
@@ -144,7 +132,7 @@ nnoremap fl :BLines<cr>
 command W :w
 
 " AirLine
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_z = airline#section#create(['%p%% %l%\:%v'])
 
@@ -155,30 +143,24 @@ nmap ga <Plug>(EasyAlign)
 nmap <silent> <F8> :TagbarToggle<cr>
 
 " Code folding
-set foldmethod=manual
-set nofoldenable
-set foldexpr=nvim_treesitter#foldexpr()
-
-" Color scheme
-let g:gruvbox_contrast_dark="medium"
-colorscheme gruvbox
+set foldlevelstart=29
+set foldcolumn=1
+set foldmethod=indent
+set foldexpr="nvim_treesitter#foldexpr()"
 
 " Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
 set termguicolors
 
+" Color scheme
+" let g:gruvbox_contrast_dark="medium"
+colorscheme everforest
+
 " File types
 
-au BufEnter,BufNew *.vs,*.fs,*.vsh,*.fsh,*.glsl     setlocal ft=glsl
-au BufEnter,BufNew *.asm,*.s,*.S                    setlocal ft=nasm
-au BufEnter,BufNew Makefile,makefile,*.makefile     setlocal noexpandtab ft=make
+autocmd BufEnter,BufNew *.vs,*.fs,*.vsh,*.fsh,*.glsl     setlocal ft=glsl
+autocmd BufEnter,BufNew *.asm,*.s,*.S                    setlocal ft=nasm
+" autocmd BufEnter,BufNew Makefile,makefile,*.makefile     setlocal noexpandtab ft=make
 
-" vimtex, add cmp-omni
-autocmd FileType tex lua require('cmp').setup.buffer { sources = { { name = 'omni' } }  }
-
-"autocmd FileType html setlocal tabstop=2
-"autocmd FileType css setlocal tabstop=2
-"autocmd FileType xml setlocal tabstop=2
-"autocmd FileType markdown setlocal tabstop=2
-"autocmd FileType journal setlocal tabstop=2
-
-call SetTab(4)
+set tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType nasm setlocal tabstop=8 shiftwidth=8 softtabstop=8
+autocmd FileType tex setlocal tabstop=2 shiftwidth=2 softtabstop=2

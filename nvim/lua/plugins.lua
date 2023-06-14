@@ -14,17 +14,19 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-omni'
     use 'saadparwaiz1/cmp_luasnip'
 
     -- Syntax stuff: Treesitter
     use 'nvim-treesitter/nvim-treesitter'
 
-    -- Status bar: Airline
+    -- Status bar: Lualine
     use 'vim-airline/vim-airline'
+    -- use 'nvim-lualine/lualine.nvim'
+    -- GitSigns
+    use 'lewis6991/gitsigns.nvim'
 
     -- Finding files: FZF
-    use '/usr/local/opt/fzf'
+    use '/usr/local/opt/fzf/'
     use 'junegunn/fzf.vim'
 
     -- Method signature
@@ -53,7 +55,9 @@ return require('packer').startup(function()
 
     -- functionalities: Move
     use 'junegunn/vim-easy-align'
-    use 'easymotion/vim-easymotion'
+    -- use 'easymotion/vim-easymotion'
+    use 'phaazon/hop.nvim' -- recently trying alts
+    use 'haya14busa/is.vim'
 
     -- Color tweak
     use 'chrisbra/Colorizer'
@@ -79,4 +83,10 @@ return require('packer').startup(function()
     -- Languages
     -- use 'Shirk/vim-gas'
     -- use 'p00f/clangd_extensions.nvim'
+
+    -- Trying out IDE stuff, pretty nice!
+    -- use 'ldelossa/nvim-ide'
+
+    -- Arduino
+    use 'sudar/vim-arduino-syntax'
 end)

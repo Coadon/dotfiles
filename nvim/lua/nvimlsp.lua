@@ -42,8 +42,8 @@ local lspconfig = require('lspconfig');
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = { 'clangd', 'pyright', 'tsserver' }
--- Yes, i use this for latex o top of Intellij
+local servers = { 'clangd', 'pyright', 'tsserver', 'texlab' }
+-- Yes, i use this for latex on top of Intellij
 
 for _, server in ipairs(servers) do
     lspconfig[server].setup {
@@ -52,6 +52,21 @@ for _, server in ipairs(servers) do
         capabilities = capabilities,
     }
 end
+
+-- Arduino
+-- local MY_FQBN = "arduino:avr:uno"
+-- lspconfig.arduino_language_server.setup {
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+--     cmd = {
+--         "arduino-language-server",
+--         "-clangd", "/usr/local/opt/llvm/bin/clangd",
+--         "-cli", "/usr/local/bin/arduino-cli",
+--         "-cli-config", "/Users/h/Library/Arduino15/arduino-cli.yaml",
+--         "-fqbn", MY_FQBN
+--     }
+-- }
 
 --require("clangd_extensions").setup {
 --    server = {
