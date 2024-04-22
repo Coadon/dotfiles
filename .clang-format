@@ -1,6 +1,8 @@
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
-AccessModifierOffset: -2
+AllowShortIfStatementsOnASingleLine: true
 SpaceAfterCStyleCast: true
+AccessModifierOffset: -4
 SortIncludes: false
+ColumnLimit: 100
+IndentWidth: 4
+UseTab: Never
+TabWidth: 4

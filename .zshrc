@@ -1,25 +1,21 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
-# Homebrew paths
-eval $(/usr/local/bin/brew shellenv)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/h/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="geoffgarside"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,7 +67,7 @@ ZSH_THEME="geoffgarside"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="mm/dd/yyyy"
+# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -83,12 +79,13 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    vi-mode
+    macos
+    fzf-tab
+    # vi-mode
     zsh-syntax-highlighting
+    # zsh-autosuggestions
+    zsh-vi-mode
 )
-
-# Disable zsh completion fix
-ZSH_DISABLE_COMPFIX="true"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,9 +98,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
+  export EDITOR='vim'
 else
-    export EDITOR='nvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -117,56 +114,35 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gcc=/usr/local/bin/gcc-12
-alias g++=/usr/local/bin/g++-12
-# ar, ranlib, clang++
+alias gcc="gcc-13"
+alias g++="g++-13"
 
-# Command-line editing
-set -o vi
+# PGP Keys
+GPG_TTY=$(tty)
+export GPG_TTY
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# No bell
+unsetopt beep
+
+# /Applications/Godot_mono.app/Contents/MacOS/Godot
+export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
+
+export PATH="${PATH}:/Users/rupert/Library/Python/3.9/bin/:/usr/local/share/apache-maven-3.9.6/bin"
+# export FZF_DEFAULT_COMMAND="fd --type f --color=always"
 
 
-### Paths START
+# -------------------
+# CUSTOMS
+# -------------------
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # bun completions
-[ -s "/Users/h/.bun/_bun" ] && source "/Users/h/.bun/_bun"
+[ -s "/Users/rupert/.bun/_bun" ] && source "/Users/rupert/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Setting execution PATH for CommandLineTools
-export PATH="$PATH:/Library/Developer/CommandLineTools/usr/bin/"
-
-export PATH="$HOME/.scripts:$PATH"
-
-# Setting path for Python 3.9
-export PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}"
-
-# LLVM
-
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/llvm/lib"
-# export CPPFLAGS="-I/usr/local/opt/llvm/include"
-# export LDFLAGS="-L/usr/local/opt/llvm/lib/c++ -Wl,-rpath,/usr/local/opt/llvm/lib/c++"
-
-# GNU Binutils
-
-export PATH="/usr/local/opt/binutils/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/binutils/lib"
-# export CPPFLAGS="-I/usr/local/opt/binutils/include"
-
-# For .scripts/a
-export exe="./a.out"
-
-# Compiling
-export CC=gcc
-export LD=gcc
-
-# export PREFIX=/usr/local/bin
-# export TARGET=
-
-### Paths END
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# test -e /Users/h/.iterm2_shell_integration.zsh && source /Users/h/.iterm2_shell_integration.zsh || true
+export PATH="$PATH:$BUN_INSTALL/bin"
