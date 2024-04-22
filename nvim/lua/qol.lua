@@ -28,6 +28,8 @@ vim.cmd([[
 highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
 
+colorscheme habamax
+
 autocmd FileType glsl setlocal commentstring=/*\ %s\ */
 ]])
 
