@@ -118,8 +118,7 @@ alias gcc="gcc-13"
 alias g++="g++-13"
 
 # PGP Keys
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY="$(TTY)"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
