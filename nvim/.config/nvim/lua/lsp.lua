@@ -201,7 +201,7 @@ cmp.setup.cmdline(':', {
 -- luasnip
 require("luasnip.loaders.from_snipmate").lazy_load('../snippets/*')
 
-local kind_icons = {
+local kinds = {
   Text = "",
   Method = "M",
   Function = "ƒ",
@@ -210,15 +210,15 @@ local kind_icons = {
   Variable = "v",
   Class = "C",
   Interface = "I",
-  Module = "",
+  Module = "module",
   Property = "p",
-  Unit = "",
-  Value = "",
+  Unit = "unit",
+  Value = "val",
   Enum = "e",
   Keyword = "*",
-  Snippet = "",
-  Color = "",
-  File = "∑",
+  Snippet = "",
+  Color = "color",
+  File = "file",
   Reference = "",
   Folder = "/",
   EnumMember = ".",
@@ -233,7 +233,7 @@ local kind_icons = {
 cmp.setup{
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
+      vim_item.kind = string.format('%s', kinds[vim_item.kind])
       return vim_item
     end
   }

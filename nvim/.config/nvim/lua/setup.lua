@@ -18,7 +18,7 @@ vim.o.smartindent = true
 vim.o.autoindent = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
-vim.o.softshiftwidth = 4
+vim.o.softtabstop = 4
 vim.o.completeopt = "menu,menuone,noselect"
 
 vim.cmd("filetype plugin indent on")
@@ -30,7 +30,7 @@ vim.o.showmode = true
 
 vim.o.list = true
 vim.o.cursorline = true
-vim.o.listchars = "tab:»⋅,trail:⋅"
+vim.o.listchars = "tab:>-,trail:⋅,eol:¶"
 vim.o.backspace = "indent,eol,start"
 
 vim.o.wrap = true
@@ -44,8 +44,6 @@ vim.o.cinoptions = "m1"
 vim.o.updatetime = 300
 vim.o.signcolumn = "yes"
 
-vim.o.nobackup = true
-vim.o.nowritebackup = true
 vim.o.autoread = true
 
 vim.o.termguicolors = true
@@ -83,6 +81,7 @@ command CurCol :set cursorcolumn
 
 map("n", "<C-c>", "<esc>")
 map("n", "<C-s>", ":w<cr>")
+map("n", ";s", ":w<cr>")
 
 noremap("i", "<C-h>", "<left>")
 noremap("i", "<C-j>", "<down>")

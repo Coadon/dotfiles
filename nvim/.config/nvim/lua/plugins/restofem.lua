@@ -15,6 +15,8 @@ return {
     -- "lewis6991/gitsigns.nvim",
     --
 
+    "airblade/vim-gitgutter",
+
 
     -- "chrisbra/Colorizer"
     "preservim/vimux",

@@ -24,7 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -81,11 +81,11 @@ plugins=(
     git
     macos
     fzf-tab
-    # vi-mode
     zsh-syntax-highlighting
-    # zsh-autosuggestions
     zsh-vi-mode
 )
+    # vi-mode
+    # zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,6 +105,7 @@ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+export CFLAGS="-O1 -Wall -Wextra -Wpedantic"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -114,34 +115,33 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gcc="gcc-13"
-alias g++="g++-13"
+alias gcc="gcc-14"
+alias g++="g++-14"
 
 # PGP Keys
-export GPG_TTY="$(TTY)"
+export GPG_TTY=$TTY
+
+# -------------------
+# CUSTOMS
+# -------------------
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # No bell
 unsetopt beep
 
-# /Applications/Godot_mono.app/Contents/MacOS/Godot
-export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
-
 export PATH="${PATH}:/Users/rupert/Library/Python/3.9/bin/:/usr/local/share/apache-maven-3.9.6/bin"
 # export FZF_DEFAULT_COMMAND="fd --type f --color=always"
 
-
-# -------------------
-# CUSTOMS
-# -------------------
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# /Applications/Godot_mono.app/Contents/MacOS/Godot
+export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 
 # bun completions
 [ -s "/Users/rupert/.bun/_bun" ] && source "/Users/rupert/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$PATH:$BUN_INSTALL/bin"
+# export PATH="$PATH:$BUN_INSTALL/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -1,27 +1,148 @@
 snippet .
 	.
 
-snippet _KICKSTART
+snippet once
+	#pragma once
+
+
+snippet _KICKSTART_S
+	/*
+	@FORTPILE wrote this.
+	Problem: $1
+	Date: $2
+	*/
+
+	#pragma GCC optimize("Ofast")
+	#pragma GCC target("avx2")
+
 	#include <bits/stdc++.h>
 	using namespace std;
 
-	typedef long long ll;
-	typedef long double ld;
-	#define arr array
-	#define vec vector
-	#define PB push_back
-	#define MP make_pair
-	// #define SETP(x) setprecision(x)
-	// #define ALLOF(x) (x).begin(), (x).end()
-	// #define RANGE(i,a,b) (int i = a; i <= b; ++i)
+	#define FOR(i, a, b, s) for (int i=(a); (s)>0?i<(b):i>(b); i+=(s))
+	#define INF numeric_limits<ll>::max()
+	#define EACH(x, a) for (auto& x: (a))
+	#define all(x) (x).begin(), (x).end()
+	#define setp(x) setprecision(x)
+	#define sz(x) ((int)(x).size())
+	#define pb push_back
+	#define mp make_pair
+	#define ff first
+	#define ss second
+	#define nl '\n'
+
+	template <typename T, size_t N> using ar = array<T, N>;
+	template <typename T> using vt = vector<T>;
+
+	typedef unsigned long long int ull;
+	typedef long long int ll;
+	typedef long double lld;
+
+	void solve() {
+		$3
+	}
 
 	int main(void) {
 		ios::sync_with_stdio(0);
 		cin.tie(0);
-		$1
+
+		int tc = 1;
+		cin >> tc;
+		while (tc--) {
+			solve();
+		}
+	}
+
+snippet _KICKSTART_L
+	/*
+	@FORTPILE wrote this.
+	Problem: $1
+	Date: $2
+	*/
+	
+	// clang-format off
+	#pragma GCC optimize("Ofast")
+	#pragma GCC target("avx2")
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	// #include <ext/pb_ds/assoc_container.hpp>
+	// #include <ext/pb_ds/tree_policy.hpp>
+	// using namespace __gnu_pbds;
+
+	// template <typename T>
+	// using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
+	template <typename T> using minprique = priority_queue<T, vector<T>, greater<T>>;
+	template <typename T> using prique = priority_queue<T>;
+	template <typename T, size_t N> using ar = array<T, N>;
+	template <typename T> using vt = vector<T>;
+
+	typedef unsigned long long int ull;
+	typedef long long int ll;
+	typedef long double lld;
+
+	#define FastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+	#define INF numeric_limits<ll>::max()
+	#define setp(x) 	setprecision(x)
+	#define nl '\n'
+
+	#define all(x)      (x).begin(), (x).end()
+	#define rall(x)     (x).rbegin(), (x).rend()
+	#define popfront(x) (x).erase((x).begin())
+	#define sx(x)       ((int)(x).size())
+	#define mp(x, y)    make_pair(x, y)
+	#define pb          push_back
+	#define ppb         pop_back
+	#define ff          first
+	#define ss          second
+
+	#define __FOR(i, a, b, s) for (int i=(a); (s)>0?i<(b):i>(b); i+=(s))
+	#define __FOR1(e) __FOR(i, 0, e, 1)
+	#define __FOR2(i, e) __FOR(i, 0, e, 1)
+	#define __FOR3(i, b, e) __FOR(i, b, e, 1)
+	#define __FOR4(i, b, e, s) __FOR(i, b, e, s)
+	#define __RUN5TH(a, b, c, d, e, ...) e
+	#define __FORC(...) __RUN5TH(__VA_ARGS__, __FOR4, __FOR3, __FOR2, __FOR1)
+	#define FOR(...) __FORC(__VA_ARGS__)(__VA_ARGS__)
+	#define EACH(x, a) for (auto& x: (a))
+
+	template <typename T> bool umin(T& a, const T& b) { return b<a?a=b,1:0; }
+	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
+
+	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
+	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
+	ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
+	ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+	ll modpow(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
+	ll mminvprime(ll a, ll b) {return modpow(a, b - 2, b);}
+	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
+	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
+	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
+	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;} // only for prime m
+	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
+	// clang-format on
+
+	void solve(const int& TC) {
+		$3
+	}
+
+	int main(void) {
+		FastIO;
+
+		int tc = 1;
+		cin >> tc;
+		FOR(i,tc) {
+			solve(i+1);
+		}
 	}
 
 snippet _MAIN
-	int main(void) {
+	int main(int argc, char const *argv[]) {
 		$1
 	}
+
+snippet _TITLE
+	// ===================================
+	// § $1
+	// ===================================
+

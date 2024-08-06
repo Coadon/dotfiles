@@ -28,25 +28,27 @@ vim.cmd([[
 highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
 
-colorscheme habamax
+" colorscheme habamax
+colorscheme everforest
 
-autocmd FileType glsl setlocal commentstring=/*\ %s\ */
 ]])
 
 -- SEMICOLON SHORTCUTS
 vim.cmd([[
 au FileType cpp,c,make nnoremap <silent> ;r  :VimuxRunCommand "make && a"<cr>
 au FileType cpp,c,make nnoremap <silent> ;R  :VimuxRunCommand "make run"<cr>
-au FileType cpp,c,make nnoremap <silent> ;e  :VimuxRunCommand "make $exe"<cr>
-au FileType cpp,c,make nnoremap <silent> ;E  :VimuxRunCommand "make $exe && $exe $exeargs"<cr>
-au FileType cpp,c,make nnoremap <silent> ;d  :VimuxRunCommand "make && lldb $exe"<CR>
+au FileType cpp,c,make nnoremap <silent> ;e  :VimuxRunCommand "make $EXE"<cr>
+au FileType cpp,c,make nnoremap <silent> ;d  :VimuxRunCommand "make && lldb $EXE"<CR>
 au FileType cpp,c,make nnoremap <silent> ;D  :VimuxRunCommand "make debug"<CR>
 au FileType cpp,c,make nnoremap <silent> ;b  :VimuxRunCommand "make"<cr>
 au FileType cpp,c,make nnoremap <silent> ;c  :VimuxRunCommand "make clean"<cr>
-au FileType cpp,c,make nnoremap <silent> ;f  :VimuxRunCommand "g++ A.cpp && ./a.out"<cr>
-au FileType cpp,c,make nnoremap <silent> ;k  :VimuxRunCommand "!!"<cr>
+au FileType cpp,c,make nnoremap <silent> ;f  :VimuxRunCommand "g++ ${WHAT_FILE} && time ./a.out"<cr>
+au FileType cpp,c,make nnoremap <silent> ;u  :VimuxRunCommand "!!"<cr>
 au FileType cpp,c,make nnoremap <silent> ;k  :VimuxScrollUpInspect<cr>
 au FileType cpp,c,make nnoremap <silent> ;j  :VimuxScrollDownInspect<cr>
+
+au FileType glsl setlocal commentstring=//\ %s
+au FileType cpp,c setlocal commentstring=//\ %s
 
 au BufEnter,BufNew *.cpp nnoremap <silent> ;p :e %<.hpp<CR>
 au BufEnter,BufNew *.hpp nnoremap <silent> ;p :e %<.cpp<CR>
@@ -62,6 +64,7 @@ au BufEnter,BufNew *.fsh nnoremap <silent> ;p :e %<.vsh<CR>
 au BufEnter,BufNew *.vert nnoremap <silent> ;p :e %<.frag<CR>
 au BufEnter,BufNew *.frag nnoremap <silent> ;p :e %<.vert<CR>
 
+nnoremap <silent> <F5> "=strftime(" %a %d/%m/%y %H:%M")<CR>P
 
 ]])
 

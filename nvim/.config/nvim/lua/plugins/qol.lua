@@ -8,6 +8,11 @@ end
 
 return {
 
+    -- GIT
+    -- https://github.com/lewis6991/gitsigns.nvim
+    -- https://github.com/sindrets/diffview.nvim
+    --
+
     "tpope/vim-fugitive",
     "tpope/vim-sensible",
     "tpope/vim-surround",
@@ -17,11 +22,15 @@ return {
 
     "ntpeters/vim-better-whitespace",
     "itchyny/vim-cursorword",
-    "mg979/vim-visual-multi",
     -- "luochen1990/rainbow",
     "HiPhish/rainbow-delimiters.nvim",
 
     "sbdchd/neoformat",
+    "sindrets/diffview.nvim",
+
+    {
+        "mg979/vim-visual-multi",
+    },
 
     {
         "ray-x/lsp_signature.nvim",
