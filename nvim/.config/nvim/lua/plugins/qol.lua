@@ -8,11 +8,6 @@ end
 
 return {
 
-    -- GIT
-    -- https://github.com/lewis6991/gitsigns.nvim
-    -- https://github.com/sindrets/diffview.nvim
-    --
-
     "tpope/vim-fugitive",
     "tpope/vim-sensible",
     "tpope/vim-surround",
@@ -78,7 +73,7 @@ return {
             local Rule = require('nvim-autopairs.rule')
             local pairs = require('nvim-autopairs')
             pairs.setup()
-            pairs.add_rule(Rule("/*", "*/", {"c", "cpp"}))
+            pairs.add_rule(Rule("//", "", {"c", "cpp"}))
         end
     },
 
@@ -105,12 +100,7 @@ return {
     },
 
     {
-        "Exafunction/codeium.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", },
-        event = "BufEnter",
-        config = function()
-            require("codeium").setup()
-        end
+        "github/copilot.vim",
     },
 
     {

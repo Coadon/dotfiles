@@ -11,12 +11,17 @@ return {
         end
     },
 
-    -- GitSigns
-    -- "lewis6991/gitsigns.nvim",
+    -- GIT
+    -- https://github.com/lewis6991/gitsigns.nvim
+    -- https://github.com/sindrets/diffview.nvim
     --
 
-    "airblade/vim-gitgutter",
-
+    -- {
+    --     "lewis6991/gitsigns.nvim",
+    --     config = function()
+    --         require("gitsigns").setup {}
+    --     end
+    -- },
 
     -- "chrisbra/Colorizer"
     "preservim/vimux",
@@ -41,12 +46,6 @@ return {
         config = function()
             vim.cmd([[let g:airline_section_z = airline#section#create(['%p%% %l%\:%v'])]])
         end
-    },
-
-    -- Don't ask why, I just like it.
-    {
-        "xiyaowong/transparent.nvim",
-        lazy = false,
     },
 
 }

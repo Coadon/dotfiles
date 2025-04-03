@@ -1,44 +1,99 @@
+# .
 snippet .
 	.
 
+# use #pragma once instead
 snippet once
 	#pragma once
 
+# Old include guard
+snippet onceold
+	#ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
+	#define $1
 
-snippet _KICKSTART_S
-	/*
-	@FORTPILE wrote this.
-	Problem: $1
-	Date: $2
-	*/
+	${0}
 
-	#pragma GCC optimize("Ofast")
-	#pragma GCC target("avx2")
+	#endif
+
+snippet _pie
+    const double PI = acos(-1);
+
+# common in cp
+snippet modprime1
+	1000000007
+
+# ditto
+snippet modprime2
+	998244353
+
+# ==================================
+# KICKSTART MODULES
+# ==================================
+
+snippet _USE_UMINMAX
+	template <typename T> bool umin(T& a, const T& b) { return a>b?a=b,1:0; }
+	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
+
+snippet _USE_RANDINT
+	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
+	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
+
+snippet _USE_UTILITIES
+	// clang-format off
+	ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
+	ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+	ll modpow(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
+	ll mminvprime(ll a, ll b) {return modpow(a, b - 2, b);}
+	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
+	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
+	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
+	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;}
+	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
+	// clang-format on
+
+snippet _USE_INDEXED_SET
+	#include <ext/pb_ds/assoc_container.hpp>
+	#include <ext/pb_ds/tree_policy.hpp>
+	using namespace __gnu_pbds;
+
+	template <typename T>
+	using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
+
+snippet _USE_COLLECTIONS
+	template <typename T> using mpque = priority_queue<T, vector<T>, greater<T>>;
+	template <typename T> using pque = priority_queue<T>;
+	template <typename T, size_t N> using ar = array<T, N>;
+
+snippet _KICKSTART_M
+	$1
 
 	#include <bits/stdc++.h>
 	using namespace std;
 
-	#define FOR(i, a, b, s) for (int i=(a); (s)>0?i<(b):i>(b); i+=(s))
+	template <typename T> using vt = vector<T>;
+
+	typedef unsigned long long int ull;
+	typedef unsigned int u32;
+	typedef long long int ll;
+	typedef long double lld;
+	typedef pair<ll,ll> pll;
+	typedef vector<ll> vi;
+
+	#define LOG(a) cerr << "[DEBUG]["<<__LINE__<<"]: " << (a) << endl
 	#define INF numeric_limits<ll>::max()
-	#define EACH(x, a) for (auto& x: (a))
 	#define all(x) (x).begin(), (x).end()
-	#define setp(x) setprecision(x)
+	#define popf(x) (x).erase((x).begin())
 	#define sz(x) ((int)(x).size())
+	#define setp(x) setprecision(x)
+	#define mp(x,y) make_pair(x,y)
 	#define pb push_back
-	#define mp make_pair
+	#define ppb pop_back
 	#define ff first
 	#define ss second
 	#define nl '\n'
 
-	template <typename T, size_t N> using ar = array<T, N>;
-	template <typename T> using vt = vector<T>;
-
-	typedef unsigned long long int ull;
-	typedef long long int ll;
-	typedef long double lld;
-
 	void solve() {
-		$3
+		$2
 	}
 
 	int main(void) {
@@ -53,61 +108,47 @@ snippet _KICKSTART_S
 	}
 
 snippet _KICKSTART_L
-	/*
-	@FORTPILE wrote this.
-	Problem: $1
-	Date: $2
-	*/
-	
-	// clang-format off
-	#pragma GCC optimize("Ofast")
-	#pragma GCC target("avx2")
+	$1
 
+	// clang-format off
 	#include <bits/stdc++.h>
 	using namespace std;
 
-	// #include <ext/pb_ds/assoc_container.hpp>
-	// #include <ext/pb_ds/tree_policy.hpp>
-	// using namespace __gnu_pbds;
+	/*
+	#include <ext/pb_ds/assoc_container.hpp>
+	#include <ext/pb_ds/tree_policy.hpp>
+	using namespace __gnu_pbds;
+	template <typename T>
+	using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
+	*/
 
-	// template <typename T>
-	// using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
-	template <typename T> using minprique = priority_queue<T, vector<T>, greater<T>>;
-	template <typename T> using prique = priority_queue<T>;
+	template <typename T> using mpque = priority_queue<T, vector<T>, greater<T>>;
+	template <typename T> using pque = priority_queue<T>;
 	template <typename T, size_t N> using ar = array<T, N>;
 	template <typename T> using vt = vector<T>;
 
+	#define FastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+
 	typedef unsigned long long int ull;
+	typedef unsigned int u32;
 	typedef long long int ll;
 	typedef long double lld;
+	typedef pair<ll,ll> pll;
+	typedef vector<ll> vi;
 
-	#define FastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+	#define LOG(a) cerr << "[DEBUG]["<<__LINE__<<"]: " << (a) << endl
 	#define INF numeric_limits<ll>::max()
-	#define setp(x) 	setprecision(x)
-	#define nl '\n'
-
+	#define setp(x)     setprecision(x)
 	#define all(x)      (x).begin(), (x).end()
 	#define rall(x)     (x).rbegin(), (x).rend()
-	#define popfront(x) (x).erase((x).begin())
-	#define sx(x)       ((int)(x).size())
+	#define popf(x)     (x).erase((x).begin())
+	#define sz(x)       ((int)(x).size())
 	#define mp(x, y)    make_pair(x, y)
 	#define pb          push_back
 	#define ppb         pop_back
 	#define ff          first
 	#define ss          second
-
-	#define __FOR(i, a, b, s) for (int i=(a); (s)>0?i<(b):i>(b); i+=(s))
-	#define __FOR1(e) __FOR(i, 0, e, 1)
-	#define __FOR2(i, e) __FOR(i, 0, e, 1)
-	#define __FOR3(i, b, e) __FOR(i, b, e, 1)
-	#define __FOR4(i, b, e, s) __FOR(i, b, e, s)
-	#define __RUN5TH(a, b, c, d, e, ...) e
-	#define __FORC(...) __RUN5TH(__VA_ARGS__, __FOR4, __FOR3, __FOR2, __FOR1)
-	#define FOR(...) __FORC(__VA_ARGS__)(__VA_ARGS__)
-	#define EACH(x, a) for (auto& x: (a))
-
-	template <typename T> bool umin(T& a, const T& b) { return b<a?a=b,1:0; }
-	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
+	#define nl '\n'
 
 	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
 	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
@@ -118,31 +159,33 @@ snippet _KICKSTART_L
 	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
 	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
 	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
-	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;} // only for prime m
+	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;}
 	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
 	// clang-format on
 
-	void solve(const int& TC) {
-		$3
+	void solve(const u32& TC) {
+		$2
 	}
 
 	int main(void) {
 		FastIO;
 
-		int tc = 1;
+		int t = 1;
 		cin >> tc;
-		FOR(i,tc) {
-			solve(i+1);
+		for (u32 i = 1; i <= tc; i++) {
+			solve(i);
 		}
 	}
 
-snippet _MAIN
+# Main
+snippet _main
 	int main(int argc, char const *argv[]) {
 		$1
 	}
 
+# Util
 snippet _TITLE
 	// ===================================
-	// § $1
+	// $1
 	// ===================================
 

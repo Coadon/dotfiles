@@ -117,6 +117,7 @@ export CFLAGS="-O1 -Wall -Wextra -Wpedantic"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gcc="gcc-14"
 alias g++="g++-14"
+alias apt="brew" # APT, APT.. APT, APT.. uh huh uh huh
 
 # PGP Keys
 export GPG_TTY=$TTY
@@ -130,18 +131,11 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # No bell
 unsetopt beep
 
-export PATH="${PATH}:/Users/rupert/Library/Python/3.9/bin/:/usr/local/share/apache-maven-3.9.6/bin"
+export PATH="/opt/homebrew/opt/binutils/bin:${PATH}:/Library/TeX/texbin/:/Users/rupert/Library/Python/3.9/bin/:/usr/local/share/apache-maven-3.9.6/bin"
 # export FZF_DEFAULT_COMMAND="fd --type f --color=always"
 
 # /Applications/Godot_mono.app/Contents/MacOS/Godot
 export GODOT="/Applications/Godot_mono.app/Contents/MacOS/Godot"
-
-# bun completions
-[ -s "/Users/rupert/.bun/_bun" ] && source "/Users/rupert/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-# export PATH="$PATH:$BUN_INSTALL/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

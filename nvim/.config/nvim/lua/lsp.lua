@@ -5,6 +5,10 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
+vim.diagnostic.config({
+    float = { border = "rounded" },
+})
+
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -38,7 +42,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local lspconfig = require('lspconfig');
 
-
 -- LANGUAGE SERVERS
 --
 --
@@ -71,23 +74,23 @@ lspconfig.arduino_language_server.setup {
     }
 }
 
---require("clangd_extensions").setup {
---    server = {
---        flags = lsp_flags,
---        capabilities = capabilities,
---        cmd = {
---            "clangd",
---            "--background-index",
---            "--clang-tidy",
---            "--header-insertion-decorators",
---            "--suggest-missing-includes",
---            "--all-scopes-completion",
---            "--pretty",
---            "-j=4",
---            --"--header-insertion=never",
---        },
---    },
---}
+-- require("clangd_extensions").setup {
+--     server = {
+--         flags = lsp_flags,
+--         capabilities = capabilities,
+--         cmd = {
+--             "clangd",
+--             "--background-index",
+--             "--clang-tidy",
+--             "--header-insertion-decorators",
+--             "--suggest-missing-includes",
+--             "--all-scopes-completion",
+--             "--pretty",
+--             "-j=4",
+--             --"--header-insertion=never",
+--         },
+--     },
+-- }
 
 -- NVIM-CMP
 -- Completion
