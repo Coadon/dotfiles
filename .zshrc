@@ -28,7 +28,7 @@ CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -80,11 +80,11 @@ CASE_SENSITIVE="true"
 plugins=(
     git
     macos
+    vi-mode
     fzf-tab
     zsh-syntax-highlighting
-    zsh-vi-mode
 )
-    # vi-mode
+    # zsh-vi-mode
     # zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
@@ -105,7 +105,7 @@ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-export CFLAGS="-O1 -Wall -Wextra -Wpedantic"
+# export CFLAGS="-O1 -Wall -Wextra -Wpedantic"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

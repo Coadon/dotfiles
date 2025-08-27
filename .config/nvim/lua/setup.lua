@@ -30,7 +30,7 @@ vim.o.showmode = true
 
 vim.o.list = true
 vim.o.cursorline = true
-vim.o.listchars = "tab:>-,trail:⋅,eol:¶"
+vim.o.listchars = "tab:>-,trail:⋅"
 vim.o.backspace = "indent,eol,start"
 
 vim.o.wrap = true
@@ -78,7 +78,6 @@ highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
 
 colorscheme habamax
-" colorscheme everforest
 
 au FileType cpp,c,make nnoremap <silent> ;r  :VimuxRunCommand "make && a"<cr>
 au FileType cpp,c,make nnoremap <silent> ;R  :VimuxRunCommand "make run"<cr>
@@ -134,7 +133,5 @@ noremap("i", "<M-S-k>", "<Esc>:m .-2<CR>==gi")
 noremap("v", "<M-S-j>", ":m '>+1<CR>gv=gv")
 noremap("v", "<M-S-k>", ":m '<-2<CR>gv=gv")
 
-noremap("n", "gc", ":Commentary<cr>")
-noremap("x", "gc", ":'<,'>Commentary<cr>gv")
 noremap("n", "<C-_>", ":Commentary<cr>")
 noremap("x", "<C-_>", ":'<,'>Commentary<cr>gv")
