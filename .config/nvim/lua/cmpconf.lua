@@ -64,7 +64,7 @@ cmp.setup ({
     { name = 'vimtex' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = "copilot" },
-    { name = 'buffer' },
+    -- { name = 'buffer' },
     { name = 'path' },
   }),
   confirm_opts = {

@@ -52,7 +52,7 @@ vim.o.inccommand = "split"
 
 -- Code Folding
 vim.o.foldlevelstart=5
--- vim.o.foldcolumn="1"
+vim.o.foldcolumn="1"
 vim.o.foldmethod="indent"
 
 vim.g.rainbow_active = 1
@@ -135,3 +135,5 @@ noremap("v", "<M-S-k>", ":m '<-2<CR>gv=gv")
 
 noremap("n", "<C-_>", ":Commentary<cr>")
 noremap("x", "<C-_>", ":'<,'>Commentary<cr>gv")
+noremap("n", "mm", ":Commentary<cr>")
+noremap("x", "mm", ":'<,'>Commentary<cr>gv")
