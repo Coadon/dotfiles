@@ -115,8 +115,10 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gcc="gcc-14"
-alias g++="g++-14"
+alias ll="eza -l"
+alias l="eza -la"
+alias gcc="gcc-15"
+alias g++="g++-15"
 alias apt="brew" # APT, APT.. APT, APT.. uh huh uh huh
 
 # PGP Keys

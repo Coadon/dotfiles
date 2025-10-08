@@ -15,177 +15,142 @@ snippet onceold
 
 	#endif
 
-snippet _pie
-    const double PI = acos(-1);
-
-# common in cp
-snippet modprime1
-	1000000007
-
-# ditto
-snippet modprime2
-	998244353
-
-# ==================================
-# KICKSTART MODULES
-# ==================================
-
-snippet _USE_UMINMAX
-	template <typename T> bool umin(T& a, const T& b) { return a>b?a=b,1:0; }
-	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
-
-snippet _USE_RANDINT
-	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
-	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
-
-snippet _USE_UTILITIES
-	// clang-format off
-	ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
-	ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
-	ll modpow(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
-	ll mminvprime(ll a, ll b) {return modpow(a, b - 2, b);}
-	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
-	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
-	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
-	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;}
-	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
-	// clang-format on
-
-snippet _USE_INDEXED_SET
-	#include <ext/pb_ds/assoc_container.hpp>
-	#include <ext/pb_ds/tree_policy.hpp>
-	using namespace __gnu_pbds;
-
-	template <typename T>
-	using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
-
-snippet _USE_COLLECTIONS
-	template <typename T> using mpque = priority_queue<T, vector<T>, greater<T>>;
-	template <typename T> using pque = priority_queue<T>;
-	template <typename T, size_t N> using ar = array<T, N>;
-
-snippet _KICKSTART_M
-	$1
-
-	#include <bits/stdc++.h>
-	using namespace std;
-
-	template <typename T> using vt = vector<T>;
-
-	typedef unsigned long long int ull;
-	typedef unsigned int u32;
-	typedef long long int ll;
-	typedef long double lld;
-	typedef pair<ll,ll> pll;
-	typedef vector<ll> vi;
-
-	#define LOG(a) cerr << "[DEBUG]["<<__LINE__<<"]: " << (a) << endl
-	#define INF numeric_limits<ll>::max()
-	#define all(x) (x).begin(), (x).end()
-	#define popf(x) (x).erase((x).begin())
-	#define sz(x) ((int)(x).size())
-	#define setp(x) setprecision(x)
-	#define mp(x,y) make_pair(x,y)
-	#define pb push_back
-	#define ppb pop_back
-	#define ff first
-	#define ss second
-	#define nl '\n'
-
-	void solve() {
-		$2
-	}
-
-	int main(void) {
-		ios::sync_with_stdio(0);
-		cin.tie(0);
-
-		int tc = 1;
-		cin >> tc;
-		while (tc--) {
-			solve();
-		}
-	}
-
-snippet _KICKSTART_L
-	$1
-
-	// clang-format off
-	#include <bits/stdc++.h>
-	using namespace std;
-
-	/*
-	#include <ext/pb_ds/assoc_container.hpp>
-	#include <ext/pb_ds/tree_policy.hpp>
-	using namespace __gnu_pbds;
-	template <typename T>
-	using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
-	*/
-
-	template <typename T> using mpque = priority_queue<T, vector<T>, greater<T>>;
-	template <typename T> using pque = priority_queue<T>;
-	template <typename T, size_t N> using ar = array<T, N>;
-	template <typename T> using vt = vector<T>;
-
-	#define FastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
-
-	typedef unsigned long long int ull;
-	typedef unsigned int u32;
-	typedef long long int ll;
-	typedef long double lld;
-	typedef pair<ll,ll> pll;
-	typedef vector<ll> vi;
-
-	#define LOG(a) cerr << "[DEBUG]["<<__LINE__<<"]: " << (a) << endl
-	#define INF numeric_limits<ll>::max()
-	#define setp(x)     setprecision(x)
-	#define all(x)      (x).begin(), (x).end()
-	#define rall(x)     (x).rbegin(), (x).rend()
-	#define popf(x)     (x).erase((x).begin())
-	#define sz(x)       ((int)(x).size())
-	#define mp(x, y)    make_pair(x, y)
-	#define pb          push_back
-	#define ppb         pop_back
-	#define ff          first
-	#define ss          second
-	#define nl '\n'
-
-	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
-	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
-	ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
-	ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
-	ll modpow(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
-	ll mminvprime(ll a, ll b) {return modpow(a, b - 2, b);}
-	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
-	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
-	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
-	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;}
-	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
-	// clang-format on
-
-	void solve(const u32& TC) {
-		$2
-	}
-
-	int main(void) {
-		FastIO;
-
-		int t = 1;
-		cin >> tc;
-		for (u32 i = 1; i <= tc; i++) {
-			solve(i);
-		}
-	}
-
-# Main
-snippet _main
+snippet argc
 	int main(int argc, char const *argv[]) {
 		$1
 	}
 
-# Util
-snippet _TITLE
-	// ===================================
-	// $1
-	// ===================================
+snippet PI_DEF
+    const double PI = acos(-1);
 
+snippet PRIME1
+	998244353
+
+snippet PRIME2
+	1000000007
+
+snippet PRIME3
+	1000000009
+
+snippet USE_USEMIN
+	template <typename T> bool umin(T& a, const T& b) { return a>b?a=b,1:0; }
+	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
+
+snippet USE_RANDOM
+	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
+	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
+
+snippet USE_LL
+	using ll = long long;
+	using ull = unsigned long long;
+
+snippet USE_PB
+	#define pb push_back
+	#define ff first
+	#define ss second
+
+snippet USE_ALLX
+	#define allr(x) (x).rbegin(), (x).rend()
+	#define all(x) (x).begin(), (x).end()
+	#define sz(x) ((int)(x).size())
+
+snippet USE_INF
+	#define INF std::numeric_limits<int>::max()
+	#define LINF std::numeric_limits<__int128>::max()
+
+snippet USE_INDEXED_SET
+	#include <ext/pb_ds/assoc_container.hpp>
+	#include <ext/pb_ds/tree_policy.hpp>
+	using namespace __gnu_pbds;
+
+	template <typename T>
+	using indexed_set = tree<T,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>;
+
+snippet USE_PRIORITY_QUE
+	template <typename T> using mpque = priority_queue<T, vector<T>, greater<T>>;
+	template <typename T> using pque = priority_queue<T>;
+
+snippet USE_SHORTHANDS
+	template <typename T, size_t N> using ar = std::array<T, N>;
+	template <typename T> using vt = std::vector<T>;
+	using ll = long long;
+	using lld = long double;
+	using ull = unsigned long long;
+	using pii = std::pair<int, int>;
+	using pll = std::pair<ll, ll>;
+	using pdd = std::pair<lld, lld>;
+	using vi = std::vector<int>;
+	using ul = unsigned long;
+
+snippet USE_YCOMB
+	// https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0200r0.html
+	template<class Fun>
+	class y_combinator_result {
+		Fun fun_;
+	public:
+		template<class T>
+		explicit y_combinator_result(T &&fun): fun_(std::forward<T>(fun)) {}
+		template<class ...Args>
+		decltype(auto) operator()(Args &&...args) { return fun_(std::ref(*this), std::forward<Args>(args)...); }
+	};
+
+	template<class Fun>
+	decltype(auto) y_combinator(Fun &&fun) { return y_combinator_result<std::decay_t<Fun>>(std::forward<Fun>(fun)); }
+
+snippet USE_OPERATORS
+	template<typename T1, typename T2> // cin >> pair<T1, T2>
+	istream& operator>>(istream &istream, pair<T1, T2> &p) { return (istream >> p.first >> p.second); }
+	template<typename T> // cin >> vector<T>
+	istream& operator>>(istream &istream, vector<T> &v) { for (auto &it : v) cin >> it; return istream; }
+	template<typename T1, typename T2> // cout << pair<T1, T2>
+	ostream& operator<<(ostream &ostream, const pair<T1, T2> &p) { return (ostream << p.first << " " << p.second << el); }
+	template<typename T> // cout << vector<T>
+	ostream& operator<<(ostream &ostream, const vector<T> &c) { for (auto &it : c) cout << it << " "; return ostream; }
+
+snippet USE_UTILITIES
+	// clang-format off
+	ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
+	ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+	ll modpow(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
+	ll mminvprime(ll a, ll b) {return modpow(a, b - 2, b);}
+	ll modadd(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
+	ll modmul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
+	ll modsub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
+	ll moddiv(ll a, ll b, ll m) {a = a % m; b = b % m; return (modmul(a, mminvprime(b, m), m) + m) % m;}
+	bool isprime(ll n) { if(n < 2) return false; for(ll k = 2; k * k <= n; k++) if(n % k == 0) return false; return true; }
+	// clang-format on
+
+snippet USE_PRIMITIVES
+	using i128 = __int128_t;
+	using u128 = __uint128_t;
+	using f128 = __float128;
+
+snippet USE_DEBUGS
+	#ifdef FORT_DEBUG
+	#include <cf/debug.hpp>
+	#else
+	#define de(x...) (void)42
+	#endif
+
+snippet TOP
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	#define nl '\n'
+
+	$0
+
+snippet CASES
+	void solve() {
+		$0
+	}
+
+	int main(void) {
+		cin.tie(0)->sync_with_stdio(0);
+
+		int t = 1;
+		cin >> t;
+		while (t--) {
+			solve();
+		}
+	}

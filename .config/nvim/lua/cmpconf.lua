@@ -61,10 +61,9 @@ cmp.setup ({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vimtex' },
-    { name = 'luasnip' }, -- For luasnip users.
-    { name = "copilot" },
-    -- { name = 'buffer' },
+    { name = 'copilot' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
     { name = 'path' },
   }),
   confirm_opts = {
@@ -74,6 +73,14 @@ cmp.setup ({
   experimental = {
     ghost_text = true,
   },
+})
+
+cmp.setup.filetype({'tex', 'sty'}, {
+  sources = {
+    { name = 'copilot' },
+    { name = 'luasnip' },
+    { name = 'vimtex' },
+  }
 })
 
 -- Set configuration for specific filetype.

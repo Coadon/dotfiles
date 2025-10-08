@@ -55,8 +55,12 @@ vim.o.foldlevelstart=5
 vim.o.foldcolumn="1"
 vim.o.foldmethod="indent"
 
+vim.o.textwidth=80
+vim.o.colorcolumn="+1"
+
 vim.g.rainbow_active = 1
 vim.g.cursorword_delay = 800
+
 
 -- Smart Rel Numbers
 vim.cmd("autocmd InsertEnter * set norelativenumber")
@@ -70,26 +74,26 @@ function Trim()
     call winrestview(l:save)
 endfun
 
+function SetTab(n)
+    execute "set tabstop=" . a:n . " shiftwidth=" . a:n . " softtabstop=" . a:n
+endfun
+
+command -nargs=1 SetTab call SetTab(<args>)
 command Trim call Trim()
-command Fmt :Neoformat
-command CurCol :set cursorcolumn
+
+colorscheme kanagawa
 
 highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
+highlight ColorColumn guibg=#16161d
+highlight EndOfBuffer guifg=DarkGrey
 
-colorscheme habamax
-
-au FileType cpp,c,make nnoremap <silent> ;r  :VimuxRunCommand "make && a"<cr>
-au FileType cpp,c,make nnoremap <silent> ;R  :VimuxRunCommand "make run"<cr>
-au FileType cpp,c,make nnoremap <silent> ;e  :VimuxRunCommand "make $EXE"<cr>
-au FileType cpp,c,make nnoremap <silent> ;d  :VimuxRunCommand "make && lldb $EXE"<CR>
-au FileType cpp,c,make nnoremap <silent> ;D  :VimuxRunCommand "make debug"<CR>
-au FileType cpp,c,make nnoremap <silent> ;b  :VimuxRunCommand "make"<cr>
-au FileType cpp,c,make nnoremap <silent> ;c  :VimuxRunCommand "make clean"<cr>
-au FileType cpp,c,make nnoremap <silent> ;f  :VimuxRunCommand "g++ ${WHAT_FILE} && time ./a.out"<cr>
-au FileType cpp,c,make nnoremap <silent> ;u  :VimuxRunCommand "!!"<cr>
-au FileType cpp,c,make nnoremap <silent> ;k  :VimuxScrollUpInspect<cr>
-au FileType cpp,c,make nnoremap <silent> ;j  :VimuxScrollDownInspect<cr>
+au FileType cpp nnoremap ;Q :CphReceive<cr>
+au FileType cpp nnoremap ;t :CphTest<cr>
+au FileType cpp nnoremap ;T :CphRetest<cr>
+au FileType cpp nnoremap ;d :CphDelete<cr>
+au FileType cpp nnoremap ;s :CphStop<cr>
+au FileType cpp nnoremap ;y ggVG:y+<cr>
 
 au FileType glsl setlocal commentstring=//\ %s
 au FileType cpp,c setlocal commentstring=//\ %s

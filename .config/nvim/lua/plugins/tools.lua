@@ -4,8 +4,6 @@ return {
   "tpope/vim-surround",
   "tpope/vim-commentary",
 
-  "sbdchd/neoformat",
-
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()

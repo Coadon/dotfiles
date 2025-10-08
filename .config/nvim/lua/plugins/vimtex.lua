@@ -6,7 +6,7 @@ return {
       vim.g.vimtex_compiler_method = "latexmk"
     end,
     dependencies = {
-      "micangl/cmp-vimtex", -- vimtex
+      {"micangl/cmp-vimtex", lazy = false}
     }
   },
 }

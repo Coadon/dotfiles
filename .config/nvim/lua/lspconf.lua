@@ -18,6 +18,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+    --- toggle inlay hints
+    vim.lsp.inlay_hint.enable(true)
+
+    --- toggle diagnostics
+    vim.diagnostic.enable()
+
+    --- autocmd to show diagnostics on CursorHold
+    vim.api.nvim_create_autocmd("CursorHold", {
+      buffer = bufnr,
+      desc = "✨lsp show diagnostics on CursorHold",
+      callback = function()
+        local hover_opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = "rounded",
+          source = "always",
+          prefix = " ",
+        }
+        vim.diagnostic.open_float(nil, hover_opts)
+      end,
+    })
+
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
@@ -41,8 +63,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local lspconfig = require('lspconfig');
-
 -- LANGUAGE SERVERS
 --
 --
@@ -51,17 +71,31 @@ local lspconfig = require('lspconfig');
 --
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig["clangd"].setup {
+-- Clangd
+vim.lsp.enable("clangd", {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
-}
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--inlay-hints=true",
+  },
+})
 
-lspconfig["harper_ls"].setup {}
+-- Harper
+vim.lsp.enable("harper_ls")
+
+-- Gopls
+vim.lsp.enable("gopls")
+
+-- Rust
+-- vim.lsp.enable("rust-analyzer")
 
 -- Arduino
 local MY_ARDUINO_FQBN = "arduino:avr:uno"
-lspconfig["arduino_language_server"].setup {
+vim.lsp.enable("arduino_language_server", {
   flags = lsp_flags,
   capabilities = capabilities,
   cmd = {
@@ -71,4 +105,4 @@ lspconfig["arduino_language_server"].setup {
     "-cli-config", "/Users/h/Library/Arduino15/arduino-cli.yaml",
     "-fqbn", MY_ARDUINO_FQBN
   }
-}
+})
