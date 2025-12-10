@@ -1,4 +1,4 @@
-.git/
+.git
 .gitignore
 .DS_Store
 bootstrap.zsh

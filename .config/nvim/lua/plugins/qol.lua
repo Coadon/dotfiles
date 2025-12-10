@@ -7,53 +7,26 @@ local function map(mode, key, command)
 end
 
 return {
-
-  -- Color
+  -- Which key
   {
-    "rebelot/kanagawa.nvim",
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup()
+    end
   },
 
   -- Scroll bar
   {
-    "petertriho/nvim-scrollbar",
+    "dstein64/nvim-scrollview",
     config = function()
-      require("scrollbar").setup()
+      require("scrollview").setup()
     end
   },
 
-  "preservim/tagbar",
-  "haya14busa/is.vim",
-  "ntpeters/vim-better-whitespace",
-  "itchyny/vim-cursorword",
-
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    submodules = false,
-  },
-
-  {
-    "stevearc/conform.nvim",
-    opts = {},
-    config = {
-      vim.api.nvim_create_user_command("Format", function(args)
-        local range = nil
-        if args.count ~= -1 then
-          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-          range = {
-            start = { args.line1, 0 },
-            ["end"] = { args.line2, end_line:len() },
-          }
-        end
-        require("conform").format({ async = true, lsp_format = "fallback", range = range })
-      end, { range = true })
-    },
-    lazy = false,
-  },
-
-  "sindrets/diffview.nvim",
-
   {
     "nvim-tree/nvim-tree.lua",
+    lazy = true,
+    trigger = "tt",
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
@@ -62,10 +35,6 @@ return {
     keys = {
       { "tt", "<cmd>NvimTreeToggle<cr>", desc = "Open Tree." },
     }
-  },
-
-  {
-    "mg979/vim-visual-multi",
   },
 
   {
@@ -87,13 +56,11 @@ return {
   },
 
   {
-    "junegunn/fzf.vim",
+    "ibhagwan/fzf-lua",
     dependencies = {{ dir = "/opt/homebrew/opt/fzf" }},
     config = function()
-      vim.g.rg_derive_root = "true"
-      vim.o.grepprg = "rg --smart-case --follow"
-      noremap("n", "ff", ":Files<cr>")
-      noremap("n", "fg", ":Rg<cr>")
+      noremap("n", "ff", ":FzfLua files<cr>")
+      noremap("n", "fg", ":FzfLua grep<cr>")
       vim.cmd("command W :w") -- Very annoying
     end
   },

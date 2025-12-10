@@ -3,17 +3,8 @@ snippet .
 	.
 
 # use #pragma once instead
-snippet once
+snippet ponce
 	#pragma once
-
-# Old include guard
-snippet onceold
-	#ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
-	#define $1
-
-	${0}
-
-	#endif
 
 snippet argc
 	int main(int argc, char const *argv[]) {
@@ -37,8 +28,8 @@ snippet USE_USEMIN
 	template <typename T> bool umax(T& a, const T& b) { return a<b?a=b,1:0; }
 
 snippet USE_RANDOM
-	mt19937 mt_rng(chrono::steady_clock::now().time_since_epoch().count());
-	ll randint(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(mt_rng); }
+	std::mt19937 mt_rng(std::chrono::steady_clock::now().time_since_epoch().count());
+	ll randint(ll a, ll b) { return std::uniform_int_distribution<ll>(a, b)(mt_rng); }
 
 snippet USE_LL
 	using ll = long long;
@@ -132,7 +123,7 @@ snippet USE_DEBUGS
 	#define de(x...) (void)42
 	#endif
 
-snippet TOP
+snippet CP_TOP
 	#include <bits/stdc++.h>
 	using namespace std;
 

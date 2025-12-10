@@ -8,6 +8,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 -- Rounded floats
 vim.diagnostic.config({
   float = { border = "rounded" },
+  virtual_text = true,
 })
 
 -- Use LspAttach autocommand to only map the following keys
@@ -63,6 +64,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+
 -- LANGUAGE SERVERS
 --
 --
@@ -80,18 +82,22 @@ vim.lsp.enable("clangd", {
     "clangd",
     "--background-index",
     "--clang-tidy",
+    "--clang-tidy-checks='clang-analyzer-*,performance-*",
     "--inlay-hints=true",
   },
 })
 
 -- Harper
-vim.lsp.enable("harper_ls")
+-- vim.lsp.enable("harper_ls")
 
 -- Gopls
 vim.lsp.enable("gopls")
 
+-- Haskell
+vim.lsp.enable("hls")
+
 -- Rust
--- vim.lsp.enable("rust-analyzer")
+vim.lsp.enable("rust_analyzer")
 
 -- Arduino
 local MY_ARDUINO_FQBN = "arduino:avr:uno"

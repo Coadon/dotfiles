@@ -19,13 +19,12 @@ cmp.setup ({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -41,8 +40,6 @@ cmp.setup ({
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
       else
         fallback()
       end
@@ -52,8 +49,6 @@ cmp.setup ({
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
-      elseif check_backspace() then
-        fallback()
       else
         fallback()
       end
@@ -63,7 +58,6 @@ cmp.setup ({
     { name = 'nvim_lsp' },
     { name = 'copilot' },
     { name = 'luasnip' },
-    { name = 'buffer' },
     { name = 'path' },
   }),
   confirm_opts = {
@@ -114,29 +108,29 @@ cmp.setup.cmdline(':', {
 require("luasnip.loaders.from_snipmate").lazy_load('../snippets/*')
 
 local kinds = {
-  Text = "",
+  Text = "t",
   Method = "M",
   Function = "ƒ",
-  Constructor = "",
+  Constructor = "*",
   Field = "f",
   Variable = "v",
   Class = "C",
   Interface = "I",
-  Module = "module",
+  Module = "M",
   Property = "p",
   Unit = "unit",
   Value = "val",
   Enum = "e",
-  Keyword = "*",
+  Keyword = "\"",
   Snippet = "",
   Color = "color",
   File = "file",
-  Reference = "",
+  Reference = "ref",
   Folder = "/",
   EnumMember = ".",
   Constant = "#",
   Struct = "S",
-  Event = "",
+  Event = "E",
   Operator = "+",
   TypeParameter = ":",
   Copilot = "µ",

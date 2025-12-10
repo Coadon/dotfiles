@@ -39,7 +39,7 @@ vim.o.encoding = "utf-8"
 vim.o.hidden = true
 vim.o.title = true
 
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.cinoptions = "m1"
 vim.o.updatetime = 300
 vim.o.signcolumn = "yes"
@@ -55,12 +55,11 @@ vim.o.foldlevelstart=5
 vim.o.foldcolumn="1"
 vim.o.foldmethod="indent"
 
-vim.o.textwidth=80
+vim.o.textwidth=100
 vim.o.colorcolumn="+1"
 
 vim.g.rainbow_active = 1
 vim.g.cursorword_delay = 800
-
 
 -- Smart Rel Numbers
 vim.cmd("autocmd InsertEnter * set norelativenumber")
@@ -68,24 +67,25 @@ vim.cmd("autocmd InsertLeave * set relativenumber")
 
 -- UTILITIES
 vim.cmd([[
-function Trim()
+function! Trim()
     let l:save = winsaveview()
     keeppatterns %s/\\s\\+$//e
     call winrestview(l:save)
 endfun
 
-function SetTab(n)
+function! SetTab(n)
     execute "set tabstop=" . a:n . " shiftwidth=" . a:n . " softtabstop=" . a:n
 endfun
 
-command -nargs=1 SetTab call SetTab(<args>)
-command Trim call Trim()
+colorscheme Tomorrow-Night
 
-colorscheme kanagawa
+command! -nargs=1 SetTab call SetTab(<args>)
+command! Trim call Trim()
 
 highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
-highlight ColorColumn guibg=#16161d
+highlight ColorColumn guibg=#444444
+highlight LineNr guifg=DarkGrey
 highlight EndOfBuffer guifg=DarkGrey
 
 au FileType cpp nnoremap ;Q :CphReceive<cr>
@@ -111,7 +111,11 @@ au BufEnter,BufNew *.vsh nnoremap <silent> ;p :e %<.fsh<CR>
 au BufEnter,BufNew *.fsh nnoremap <silent> ;p :e %<.vsh<CR>
 au BufEnter,BufNew *.vert nnoremap <silent> ;p :e %<.frag<CR>
 au BufEnter,BufNew *.frag nnoremap <silent> ;p :e %<.vert<CR>
+
+au BufEnter,BufNew *.org,*.lua SetTab 2
+
 ]])
+
 
 
 -- KEYS
@@ -126,8 +130,8 @@ noremap("i", "<C-j>", "<down>")
 noremap("i", "<C-k>", "<up>")
 noremap("i", "<C-l>", "<right>")
 
-noremap("n", "<C-w>v", ":split<cr><C-w>w")
-noremap("n", "<C-w>g", ":vsplit<cr><C-w>w")
+noremap("n", "<C-w>2", ":split<cr><C-w>w")
+noremap("n", "<C-w>3", ":vsplit<cr><C-w>w")
 
 -- Iterm: use left options for +Esc
 noremap("n", "<M-S-j>", ":m .+1<CR>==")

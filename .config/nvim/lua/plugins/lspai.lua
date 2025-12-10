@@ -1,5 +1,3 @@
--- TODO MERGER AND CLEAN WITH scripts/lsp.lua:
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -17,7 +15,7 @@ return {
         version = "v2.*",
         dependencies = {
           "saadparwaiz1/cmp_luasnip",
-          "honza/vim-snippets",
+          -- "honza/vim-snippets",
         },
       },
     },
@@ -28,18 +26,6 @@ return {
     config = function ()
       require("copilot_cmp").setup()
     end
-  },
-
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function ()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
   },
 
   {

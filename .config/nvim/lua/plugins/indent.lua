@@ -1,8 +1,25 @@
 return {
+  "ntpeters/vim-better-whitespace",
+  "itchyny/vim-cursorword",
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    submodules = false,
+  },
+
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function()
+      local highlight = {
+        "Red",
+        "Yellow",
+        "Blue",
+        "Orange",
+        "Green",
+        "Violet",
+        "Cyan",
+      }
       local highlight = {
         "RainbowRed",
         "RainbowYellow",
@@ -13,7 +30,7 @@ return {
         "RainbowCyan",
       }
 
-      local hooks = require "ibl.hooks"
+      local hooks = require("ibl.hooks")
       -- create the highlight groups in the highlight setup hook, so they are reset
       -- every time the colorscheme changes
       hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -28,7 +45,6 @@ return {
 
       require("ibl").setup { scope = { highlight = highlight, char = "⎸" } }
       vim.g.rainbow_delimiters = { highlight = highlight }
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end
-  },
+  }
 }
