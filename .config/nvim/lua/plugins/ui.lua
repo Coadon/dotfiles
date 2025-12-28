@@ -1,11 +1,20 @@
 
 return {
+  -- Color
+  {
+    "deparr/tairiki.nvim"
+  },
+
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
     config = function()
     end,
     opts = function()
+      local function wordcount()
+        return tostring(vim.fn.wordcount().words)
+      end
+
       require('lualine').setup {
         options = {
           theme = "auto",
@@ -16,10 +25,10 @@ return {
         },
         sections = {
           lualine_a = {"mode"},
-          lualine_b = {"filename", "branch"},
-          lualine_c = {"location", "progress"},
-          lualine_x = {"diff", "diagnostics"},
-          lualine_y = {"filetype"},
+          lualine_b = {"filename"},
+          lualine_c = {"location", "progress", { wordcount }},
+          lualine_x = {"filetype", "diff", "diagnostics"},
+          lualine_y = {"branch"},
           lualine_z = {},
         },
         extensions = {}

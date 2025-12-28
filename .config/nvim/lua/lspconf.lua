@@ -7,7 +7,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Rounded floats
 vim.diagnostic.config({
-  float = { border = "rounded" },
+  -- float = { border = "rounded" },
   virtual_text = true,
 })
 
@@ -19,8 +19,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    --- toggle inlay hints
-    vim.lsp.inlay_hint.enable(true)
+    --- inlay hints (enable or disable)
+    vim.lsp.inlay_hint.enable(false)
 
     --- toggle diagnostics
     vim.diagnostic.enable()
@@ -88,7 +88,15 @@ vim.lsp.enable("clangd", {
 })
 
 -- Harper
--- vim.lsp.enable("harper_ls")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "plaintex" },
+  callback = function()
+    vim.lsp.enable("harper_ls")
+  end,
+})
+
+-- TS
+vim.lsp.enable("ts_ls")
 
 -- Gopls
 vim.lsp.enable("gopls")

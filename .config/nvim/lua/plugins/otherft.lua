@@ -1,33 +1,13 @@
 return {
   {
     "lervag/vimtex",
-    lazy = true,
+    -- lazy = true,
     init = function()
       vim.g.vimtex_compiler_method = "latexmk"
     end,
     dependencies = {
-      { "micangl/cmp-vimtex", lazy = true },
+      { "micangl/cmp-vimtex" },
     }
-  },
-
-  {
-    "00msjr/nvim-fountain",
-    lazy = true,
-    ft = "fountain",  -- Lazy-load only for fountain files
-    config = function()
-      require("nvim-fountain").setup({
-        -- Optional configuration
-        keymaps = {
-          next_scene = "]]",
-          prev_scene = "[[",
-          uppercase_line = "<S-CR>",
-        },
-        -- Export configuration
-        export = {
-          -- pdf = { options = "--overwrite --fonts Courier" },
-        },
-      })
-    end,
   },
 
   {

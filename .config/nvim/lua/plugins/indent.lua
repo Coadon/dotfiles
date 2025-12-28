@@ -1,6 +1,12 @@
 return {
   "ntpeters/vim-better-whitespace",
-  "itchyny/vim-cursorword",
+
+  {
+    "itchyny/vim-cursorword",
+    config = function()
+      vim.g.cursorword_delay = 2000
+    end
+  },
 
   {
     "HiPhish/rainbow-delimiters.nvim",
@@ -11,16 +17,10 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function()
-      local highlight = {
-        "Red",
-        "Yellow",
-        "Blue",
-        "Orange",
-        "Green",
-        "Violet",
-        "Cyan",
+      local indent_colors = {
+        "SpecialKey",
       }
-      local highlight = {
+      local colors = {
         "RainbowRed",
         "RainbowYellow",
         "RainbowBlue",
@@ -43,8 +43,14 @@ return {
         vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
       end)
 
-      require("ibl").setup { scope = { highlight = highlight, char = "⎸" } }
-      vim.g.rainbow_delimiters = { highlight = highlight }
+      require("ibl").setup {
+        indent = { highlight = indent_colors, char = "⎸" },
+        scope = {
+          highlight = colors,
+          show_start = false,
+          show_end = false,
+        }
+      }
     end
   }
 }

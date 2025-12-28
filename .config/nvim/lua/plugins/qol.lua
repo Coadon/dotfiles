@@ -33,12 +33,13 @@ return {
       require("nvim-tree").setup()
     end,
     keys = {
-      { "tt", "<cmd>NvimTreeToggle<cr>", desc = "Open Tree." },
+      { "<space>t", "<cmd>NvimTreeToggle<cr>", desc = "Open Tree." },
     }
   },
 
   {
     "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
     submodules = false,
     config = function()
       require("lsp_signature").setup()
@@ -60,7 +61,7 @@ return {
     dependencies = {{ dir = "/opt/homebrew/opt/fzf" }},
     config = function()
       noremap("n", "ff", ":FzfLua files<cr>")
-      noremap("n", "fg", ":FzfLua grep<cr>")
+      noremap("n", "<space>g", ":FzfLua grep<cr>")
       vim.cmd("command W :w") -- Very annoying
     end
   },

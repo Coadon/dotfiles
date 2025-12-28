@@ -8,6 +8,9 @@ end
 
 -- vim.o.shada = null
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = "a"
@@ -51,7 +54,7 @@ vim.o.termguicolors = true
 vim.o.inccommand = "split"
 
 -- Code Folding
-vim.o.foldlevelstart=5
+vim.o.foldlevelstart=8
 vim.o.foldcolumn="1"
 vim.o.foldmethod="indent"
 
@@ -59,11 +62,10 @@ vim.o.textwidth=100
 vim.o.colorcolumn="+1"
 
 vim.g.rainbow_active = 1
-vim.g.cursorword_delay = 800
 
 -- Smart Rel Numbers
-vim.cmd("autocmd InsertEnter * set norelativenumber")
-vim.cmd("autocmd InsertLeave * set relativenumber")
+-- vim.cmd("autocmd InsertEnter * set norelativenumber")
+-- vim.cmd("autocmd InsertLeave * set relativenumber")
 
 -- UTILITIES
 vim.cmd([[
@@ -77,16 +79,18 @@ function! SetTab(n)
     execute "set tabstop=" . a:n . " shiftwidth=" . a:n . " softtabstop=" . a:n
 endfun
 
-colorscheme Tomorrow-Night
+colorscheme tairiki
 
 command! -nargs=1 SetTab call SetTab(<args>)
 command! Trim call Trim()
+command! InlayOff lua vim.lsp.inlay_hint.enable(false)
+command! InlayOn lua vim.lsp.inlay_hint.enable(true)
 
 highlight Comment gui=none
 highlight DiagnosticError guifg=BrightRed
-highlight ColorColumn guibg=#444444
+highlight ColorColumn guibg=#2A2A2A
 highlight LineNr guifg=DarkGrey
-highlight EndOfBuffer guifg=DarkGrey
+highlight EndOfBuffer guifg=#363636
 
 au FileType cpp nnoremap ;Q :CphReceive<cr>
 au FileType cpp nnoremap ;t :CphTest<cr>
@@ -112,6 +116,9 @@ au BufEnter,BufNew *.fsh nnoremap <silent> ;p :e %<.vsh<CR>
 au BufEnter,BufNew *.vert nnoremap <silent> ;p :e %<.frag<CR>
 au BufEnter,BufNew *.frag nnoremap <silent> ;p :e %<.vert<CR>
 
+" au BufEnter,BufNew *.md,*.tex setlocal spell
+" (using harper)
+
 au BufEnter,BufNew *.org,*.lua SetTab 2
 
 ]])
@@ -129,6 +136,10 @@ noremap("i", "<C-h>", "<left>")
 noremap("i", "<C-j>", "<down>")
 noremap("i", "<C-k>", "<up>")
 noremap("i", "<C-l>", "<right>")
+
+noremap("n", "<space>il", ":InlayOn<cr>")
+noremap("n", "<space>li", ":InlayOff<cr>")
+noremap("n", "<space>F", ":Format<cr>")
 
 noremap("n", "<C-w>2", ":split<cr><C-w>w")
 noremap("n", "<C-w>3", ":vsplit<cr><C-w>w")
