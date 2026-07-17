@@ -24,16 +24,14 @@ return {
   },
 
   {
-    "nvim-tree/nvim-tree.lua",
-    lazy = true,
-    trigger = "tt",
-    config = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      require("nvim-tree").setup()
-    end,
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false, -- neo-tree will lazily load itself
     keys = {
-      { "<space>t", "<cmd>NvimTreeToggle<cr>", desc = "Open Tree." },
+      { "<space>t", "<cmd>Neotree<cr>", desc = "Open Tree." },
     }
   },
 

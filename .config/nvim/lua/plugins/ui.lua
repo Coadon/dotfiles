@@ -1,9 +1,8 @@
 
 return {
   -- Color
-  {
-    "deparr/tairiki.nvim"
-  },
+  "deparr/tairiki.nvim",
+  "neanias/everforest-nvim",
 
   {
     "nvim-lualine/lualine.nvim",

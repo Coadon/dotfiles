@@ -1,10 +1,9 @@
 return {
-  "tpope/vim-fugitive",
-  "tpope/vim-sensible",
   "tpope/vim-surround",
   "tpope/vim-commentary",
 
   -- Git
+  "tpope/vim-fugitive",
   {
     "sindrets/diffview.nvim",
     Lazy = true,
@@ -20,6 +19,7 @@ return {
     end
   },
 
+  -- Formatter
   {
     "stevearc/conform.nvim",
     opts = {},

@@ -58,7 +58,7 @@ vim.o.foldlevelstart=8
 vim.o.foldcolumn="1"
 vim.o.foldmethod="indent"
 
-vim.o.textwidth=100
+vim.o.textwidth=80
 vim.o.colorcolumn="+1"
 
 vim.g.rainbow_active = 1
@@ -78,8 +78,6 @@ endfun
 function! SetTab(n)
     execute "set tabstop=" . a:n . " shiftwidth=" . a:n . " softtabstop=" . a:n
 endfun
-
-colorscheme tairiki
 
 command! -nargs=1 SetTab call SetTab(<args>)
 command! Trim call Trim()

@@ -101,9 +101,6 @@ vim.lsp.enable("ts_ls")
 -- Gopls
 vim.lsp.enable("gopls")
 
--- Haskell
-vim.lsp.enable("hls")
-
 -- Rust
 vim.lsp.enable("rust_analyzer")
 

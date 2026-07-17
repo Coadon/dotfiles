@@ -1,16 +1,5 @@
 return {
   {
-    "lervag/vimtex",
-    -- lazy = true,
-    init = function()
-      vim.g.vimtex_compiler_method = "latexmk"
-    end,
-    dependencies = {
-      { "micangl/cmp-vimtex" },
-    }
-  },
-
-  {
     "gruvw/strudel.nvim",
     lazy = true,
     build = "npm install",

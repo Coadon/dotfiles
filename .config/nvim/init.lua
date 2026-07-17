@@ -1,6 +1,9 @@
 require("lazyload")
+
+require("setup")
 require("lspconf")
 require("cmpconf")
-require("setup")
 
-vim.cmd("Copilot disable")
+vim.cmd([[
+colorscheme tairiki-dark
+]])

@@ -9,6 +9,15 @@ return {
   },
 
   {
-    "preservim/vim-pencil"
+    "preservim/vim-pencil",
   },
+
+  --[[
+  {
+    "nvim-neorg/neorg",
+    lazy = false,
+    version = "*",
+    config = true
+  }
+  --]]
 }
