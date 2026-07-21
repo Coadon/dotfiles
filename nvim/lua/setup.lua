@@ -23,7 +23,7 @@ vim.o.cursorline = true
 vim.o.backspace = "indent,eol,start"
 
 -- Show chars (the spaces is important)
-vim.o.listchars = "tab:+ ,leadmultispace:⋅   ,trail:⋅,nbsp:+"
+vim.o.listchars = "tab:+ ,trail:⋅,nbsp:+"
 
 -- wrapping
 vim.o.wrap = true
@@ -78,8 +78,9 @@ end
 
 -- Save and paste
 noremap("n", "<D-s>", ":w<cr>")
-noremap({"n","i"}, "<D-v>", '"+p')
 noremap("v", "<D-c>", '"+y')
+noremap("n", "<D-v>", '"+p')
+noremap("i", "<D-v>", '<esc>"+pi')
 
 -- Insert mode movement
 noremap("i", "<C-h>", "<left>")
@@ -94,8 +95,8 @@ noremap("n", "<space>li", ":InlayOff<cr>")
 noremap("n", "<space>F", ":Format<cr>")
 
 -- Panes
-noremap("n", "<C-w>2", ":split<cr><C-w>w")
-noremap("n", "<C-w>3", ":vsplit<cr><C-w>w")
+noremap("n", "<C-w>-", ":split<cr><C-w>w")
+noremap("n", "<C-w>|", ":vsplit<cr><C-w>w")
 
 -- Meta Shift for line move
 noremap("n", "<M-S-j>", ":m .+1<CR>==")

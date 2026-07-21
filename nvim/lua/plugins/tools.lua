@@ -6,6 +6,7 @@ return {
     -- Git
     "tpope/vim-fugitive",
     "esmuellert/codediff.nvim",
+    "lewis6991/gitsigns.nvim",
 
     -- Surround
     "tpope/vim-surround",

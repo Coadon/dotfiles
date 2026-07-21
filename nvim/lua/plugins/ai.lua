@@ -17,7 +17,7 @@ return {
             provider = "cline-cli",
             acp_providers = {
                 ["cline-cli"] = {
-                    command = "cline",
+                    command = "npx cline",
                     args = { "--acp" },
                 },
             }

@@ -39,7 +39,7 @@ return {
             }
 
             require("ibl").setup {
-                indent = { highlight = { "VertSplit" }, char = "·" },
+                indent = { highlight = { "SpecialKey" }, char = "·" },
                 scope = {
                     highlight = colors,
                     show_start = false,
