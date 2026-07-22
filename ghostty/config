@@ -1,0 +1,18 @@
+background = "#050505"
+background-opacity = 0.8
+background-blur-radius = 25
+background-opacity-cells = true
+
+macos-option-as-alt = true
+cursor-color = cell-foreground
+cursor-text = cell-background
+
+adjust-cell-height = 0%
+adjust-cell-width = 5%
+font-family = "Fairfax Hax"
+font-family = "Symbols Nerd Font"
+font-size = 18
+
+macos-icon = xray
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
