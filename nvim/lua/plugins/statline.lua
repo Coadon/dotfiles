@@ -10,7 +10,7 @@ return {
 
         local colors = {
             white = "#999999",
-            grey = "#555555",
+            grey = "#666666",
             yolk = "#ebdbb2",
             red = "#fb4934",
             orange = "#fb7744",
@@ -63,7 +63,7 @@ return {
                     vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
             end,
             provider = function(self)
-                return " " .. self.filename
+                return self.filename .. " "
             end,
             hl = { fg = "white" },
         }
@@ -78,7 +78,7 @@ return {
                 local flags = ""
                 if self.readonly then flags = flags .. " ne" end
                 if self.modified then flags = flags .. " *" end
-                return flags .. "  "
+                return flags .. " "
             end,
             hl = { fg = "green" },
         }
@@ -132,7 +132,7 @@ return {
             },
             {
                 provider = function(self)
-                    return self.hints > 0 and (self.hint_icon .. self.hints)
+                    return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
                 end,
                 hl = { fg = "green" },
             },
@@ -140,9 +140,9 @@ return {
 
         local FileFormat = {
             provider = function()
-                local fmt = vim.bo.fileformat
-                return fmt ~= 'unix' and fmt:upper()
-            end
+                return vim.bo.fileformat .. " "
+            end,
+            hl = { fg = "grey" }
         }
 
         local Git = {
@@ -206,8 +206,8 @@ return {
             FileFlags,
             Locator,
             Align,
-            Diagnostics,
             FileFormat,
+            Diagnostics,
             Git
         }
 

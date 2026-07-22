@@ -1,8 +1,9 @@
 #!/bin/sh
 
-ln -si $HOME/.dotfiles/nvim $HOME/.config/nvim
-ln -si $HOME/.dotfiles/fish $HOME/.config/fish
-ln -si $HOME/.dotfiles/ghostty $HOME/.config/ghostty
+echo "DANGER: MACOS BOOTSTRAP. MAY BE DESTRUCTIVE ON LINUX."
 
-ln -si $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
-ln -si $HOME/.dotfiles/clang-format $HOME/.clang-format
+ln -sFhi $HOME/.dotfiles/nvim $HOME/.config/nvim
+ln -sFhi $HOME/.dotfiles/fish $HOME/.config/fish
+ln -sFhi $HOME/.dotfiles/ghostty $HOME/.config/ghostty
+ln -sFhi $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
+ln -sFhi $HOME/.dotfiles/clang-format $HOME/.clang-format
