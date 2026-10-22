@@ -1,11 +1,15 @@
 return {
-    {
-        "folke/twilight.nvim",
-        opts = {}
-    },
 
     {
-        "folke/zen-mode.nvim"
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                width = 100
+            }
+        },
+        dependencies = {
+            "Coadon/twilight.nvim"
+        }
     },
 
     {

@@ -1,4 +1,6 @@
 return {
+    -- C#
+    --[[
     {
         "gruvw/strudel.nvim",
         lazy = true,
@@ -16,4 +18,5 @@ return {
             require("strudel").setup()
         end
     }
+    ]]--
 }

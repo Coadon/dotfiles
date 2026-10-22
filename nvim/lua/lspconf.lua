@@ -9,11 +9,12 @@
 -- Callbacks
 vim.cmd([[
 
-au BufEnter,BufNew *.md,*.tex,*.typ,*.txt   lua vim.lsp.enable("harper_ls")
-au FileType cpp,c                           lua vim.lsp.enable("clangd")
-au FileType typescript,typescriptreact      lua vim.lsp.enable("ts_ls")
-au FileType rust                            lua vim.lsp.enable("rust_analyzer")
-au FileType lua                             lua vim.lsp.enable("lua_ls")
+au BufEnter,BufNew *.md,*.tex,*.typ,*.txt lua vim.lsp.enable("harper_ls")
+au FileType cpp,c lua vim.lsp.enable("clangd")
+au FileType typescript,typescriptreact lua vim.lsp.enable("ts_ls")
+au FileType rust lua vim.lsp.enable("rust_analyzer")
+au FileType lua lua vim.lsp.enable("lua_ls")
+au FileType gdscript lua vim.lsp.enable("godot")
 
 ]])
 
@@ -27,6 +28,11 @@ vim.lsp.config("clangd", {
         "--inlay-hints=true",
     }
 })
+
+vim.lsp.config("godot", {
+    cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+})
+
 
 -- Arduino
 local MY_ARDUINO_FQBN = "arduino:avr:uno"

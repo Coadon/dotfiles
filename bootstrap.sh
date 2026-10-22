@@ -1,9 +1,23 @@
 #!/bin/sh
 
-echo "DANGER: MACOS BOOTSTRAP. MAY BE DESTRUCTIVE ON LINUX."
+echo "DANGER: BOOTSTRAP"
 
-ln -sFhi $HOME/.dotfiles/nvim $HOME/.config/nvim
-ln -sFhi $HOME/.dotfiles/fish $HOME/.config/fish
-ln -sFhi $HOME/.dotfiles/ghostty $HOME/.config/ghostty
-ln -sFhi $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
-ln -sFhi $HOME/.dotfiles/clang-format $HOME/.clang-format
+# Detect the Operating System
+OS_TYPE=$(uname -s)
+
+if [ "$OS_TYPE" = "Darwin" ]; then
+
+    ln -sFhi $HOME/.dotfiles/nvim $HOME/.config/nvim
+    ln -sFhi $HOME/.dotfiles/fish $HOME/.config/fish
+    ln -sFhi $HOME/.dotfiles/ghostty $HOME/.config/ghostty
+    ln -sFhi $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
+    ln -sFhi $HOME/.dotfiles/clang-format $HOME/.clang-format
+
+elif [ "$OS_TYPE" = "Linux" ]; then
+
+    ln -sfn $0/../tmux.conf $HOME/.tmux.conf
+    ln -sfn $0/../fish $HOME/.config/fish
+
+else
+    echo "Unknown Operating System: $OS_TYPE"
+fi

@@ -1,18 +1,27 @@
-background = "#050505"
+theme = atom one dark
+background = #000000
 background-opacity = 0.8
-background-blur-radius = 25
+background-blur-radius = 20
 background-opacity-cells = true
+
+font-family = "Cartograph CF"
+font-family = "Symbols Nerd Font"
+freetype-load-flags = monochrome
+
+font-size = 16
+font-thicken = true
+adjust-cell-width = 0%
+adjust-cell-height = 5%
 
 macos-option-as-alt = true
 cursor-color = cell-foreground
 cursor-text = cell-background
 
-adjust-cell-height = 0%
-adjust-cell-width = 5%
-font-family = "Fairfax Hax"
-font-family = "Symbols Nerd Font"
-font-size = 18
-
 macos-icon = xray
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
+
+window-width = 80
+window-height = 25
+
+notify-on-command-finish = unfocused

@@ -1,11 +1,3 @@
-local function noremap(mode, key, command)
-    vim.keymap.set(mode, key, command, {noremap=true,silent=true})
-end
-
-local function map(mode, key, command)
-    vim.keymap.set(mode, key, command)
-end
-
 return {
     -- Which key
     {
@@ -34,6 +26,17 @@ return {
         end
     },
 
+    -- Syntax stuff: Treesitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ':TSUpdate',
+        main = "nvim-treesitter.config",
+        opts = {
+            highlight = { enable = true },
+            indent = { enable = true },
+        }
+    },
+
     -- Surround is in TOOLS
 
     -- Starting screen
@@ -44,5 +47,5 @@ return {
             startify.file_icons.enabled = false
             require("alpha").setup(startify.config)
         end
-    }
+    },
 }

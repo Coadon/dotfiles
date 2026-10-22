@@ -12,24 +12,22 @@ return {
     },
 
     {
-        "yetone/avante.nvim",
-        opts = {
-            provider = "cline-cli",
-            acp_providers = {
-                ["cline-cli"] = {
-                    command = "npx cline",
-                    args = { "--acp" },
-                },
-            }
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = {
+            "markdown",
         }
     },
 
     {
-        "MeanderingProgrammer/render-markdown.nvim",
-        ft = {
-            "markdown",
-            "Avante"
-        }
+        "carlos-algms/agentic.nvim",
+        opts = {
+            acp_providers = {
+                ["pi-acp"] = {
+                    name = "That cool and nice PI ACP",
+                    command = "pi-acp",
+                },
+            },
+        },
     },
 
     -- Common dependencies
