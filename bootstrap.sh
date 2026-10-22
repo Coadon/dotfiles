@@ -15,6 +15,7 @@ if [ "$OS_TYPE" = "Darwin" ]; then
 
 elif [ "$OS_TYPE" = "Linux" ]; then
 
+    mkdir .config
     ln -sfn $0/../tmux.conf $HOME/.tmux.conf
     ln -sfn $0/../fish $HOME/.config/fish
 
